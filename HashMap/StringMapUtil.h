@@ -1,5 +1,5 @@
-#ifndef STRING_KEY__H
-#define STRING_KEY__H
+#ifndef STRING_MAP_UTIL__H
+#define STRING_MAP_UTIL__H
 /**
  * Utility functions to use Strings as keys for HashMap.
  * @author Wyatt Bertorelli <wyattbertorelli@gmail.com>
