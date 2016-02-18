@@ -16,14 +16,14 @@ typedef struct MapElements {
  * Copies each element in the map to an array
  * @param map input map.
  */
-mapElements* map2Array(HashMap* map);
+MapElement* map2Array(const HashMap* map);
 
 /**
  * Sorts array of elements in descending order
  * by comparing value. Uses underlying qsort in stdlib.h
  * @param elements Array to sort
  */
-void sortArray(mapElements* elements);
+void sortArray(MapElement* elements, uint32_t nElements);
 
 /**
  * Compares two mapElements
@@ -35,7 +35,7 @@ int compareElements(const void* a, const void* b);
  * Frees memory of an MapElement array
  * @param elements array to free
  */
-void deleteMapArray(MapElements* elements uint32_t nElements);
+void deleteMapArray(MapElement* elements, uint32_t nElements);
 
 /**
  * djb2 hashing function invented/reported by Dan Bernstein.
@@ -44,7 +44,7 @@ void deleteMapArray(MapElements* elements uint32_t nElements);
  * @param k String key (casted as void*) to hash
  * @return Hash hash of key
  */
-Hash StringHasher(Key strK);
+Hash stringHasher(const Key strK);
 
 /**
  * Wrapper function for standard c library string comparator. 
@@ -52,13 +52,13 @@ Hash StringHasher(Key strK);
  * @param strKB string B to compare (casted as void*)
  * @return comparison result.
  */
-int32_t StringComparator(Key strKA, Key strKB);
+int32_t stringComparator(const Key strKA, const Key strKB);
 
 /**
  * Create a new copy of input string.
  * @param strK String to copy (casted as void*)
  * @return pointer to new copy (casted as void*)
  */
-Key StringCopy(Key strK);
+Key stringCopy(const Key strK);
 
 #endif /* MAP_UTIL__H */

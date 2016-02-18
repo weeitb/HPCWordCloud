@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <string.h>
+#include "HashMap.h"
 
-int readFile(char* filename, unsigned int startPosition, HashMap map) {
+int readFile(char* filename, unsigned int startPosition, HashMap* map) {
   FILE *fp1;
   char line[100];
-  char* word[20];
+  char word[20];
   char* startIdx;
   char* stopIdx;
   int c;
   fp1 = fopen(filename, "r");
-  
   // Jump to first new line after position specified.
   if (startPosition != 0) {
     // Jump 1 space back from desired position in case we land 
@@ -42,7 +42,7 @@ int readFile(char* filename, unsigned int startPosition, HashMap map) {
       if (startIdx != stopIdx) {
 	strncpy(word, startIdx, stopIdx - startIdx);
 	word[stopIdx - startIdx] = 0;
-	incrementKeyValu(map, word);
+	incrementKeyValue(map, word);
       }
     }
   }
