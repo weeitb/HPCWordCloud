@@ -32,6 +32,7 @@ HashMap* newMap(uint32_t nBuckets, Hasher hasher, Comparator comparator, KeyCopy
     map->buckets[i] = NULL;
   }
   map->nBuckets = nBuckets;
+  map->nElements = 0;
   return map;
 }
 
@@ -80,6 +81,7 @@ void incrementKeyValue(HashMap* map, Key k) {
   if (bucketIsEmpty) { 
     map->buckets[hash] = node;
   }
+  map->nElements++;
   node->nextNode = NULL;
   node->v = 1;
   // Copy the key so we have our own local copy.
@@ -99,7 +101,6 @@ void deleteMap(HashMap* map) {
   uint32_t i;
   for (i = 0; i < map->nBuckets; ++i) {
     node = map->buckets[i];
-    nextNode;
     while (node != NULL) {
       nextNode = node->nextNode;
       free(node->k);

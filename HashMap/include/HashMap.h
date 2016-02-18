@@ -56,6 +56,7 @@ typedef struct MapNodes {
 typedef struct HashMaps {
   MapNode** buckets;
   uint32_t nBuckets;
+  uint32_t nElements;
   Hasher hasher;
   Comparator comparator;
   KeyCopy keyCopy;
