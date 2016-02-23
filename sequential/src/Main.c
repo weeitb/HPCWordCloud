@@ -3,6 +3,9 @@
  * prints out the first 10 elements
  */
 #include <time.h>
+#include <dirent.h>
+#include <stdlib.h>
+#include <memory.h>
 #include "HashMap.h"
 #include "MapUtil.h"
 #include "FileParser.h"
@@ -13,7 +16,25 @@ int main(int argc, char** argv) {
   start = clock();
   HashMap* map = newMap(1000, &stringHasher, &stringComparator, &stringCopy);
   // Get input file from stdin
-  readFile(argv[1], 0, map);
+  DIR* dp;
+  dp = opendir(argv[1]);
+  struct dirent* ep;
+  char* filepath;
+  
+  if (dp != NULL) {
+    while (ep = readdir(dp)) {
+      filepath = (char*) malloc(1 + strlen(ep->d_name) + strlen(argv[1]));
+      strcpy(filepath, argv[1]);
+      strcat(filepath, ep->d_name);
+      readFile(filepath, 0, map);
+      free(filepath);
+    }
+  } else {
+    printf("Couldn't open directory %s\n", argv[1]);
+    return 0;
+  }
+
+  closedir(dp);
   MapElement* elements = map2Array(map);
   sortArray(elements, map->nElements);
   
