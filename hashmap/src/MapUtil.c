@@ -82,6 +82,22 @@ Hash stringHasher(const Key k) {
 }
 
 /**
+ * Very bad hasing function. 
+ * Sums result of each character of key
+ * @param k String key (casted as void*) to hash
+ * @return Hash hash of key
+ */
+Hash badStringHasher(const Key k) {
+  Hash hash = 0;
+  int c;
+  char* str = k;
+  while (c = *str++) {
+    hash += c;
+  }
+  return hash;
+}
+
+/**
  * Wrapper function for standard c library string comparator. 
  * @param strKA String A to compare (casted as void*)
  * @param strKB string B to compare (casted as void*)
