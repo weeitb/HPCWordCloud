@@ -27,6 +27,7 @@ typedef struct FilenameStacks {
   unsigned int nElements;
 } FilenameStack;
 
+
 /**
  * Create a new empty stack
  * @return pointer to new allocated stack.
@@ -57,6 +58,39 @@ void push(FilenameStack* stack, char* filename);
  * @param stack to pop off of.
  * @return filename string. Null if stack empty.
  */
-char* filename pop(FileNameStack* stack);
+char* filename pop(FilenameStack* stack);
+
+/**
+ * Aggregates the results of each hashmap into the map at index 0.
+ * Each thread performs work on the same block in each map calculated
+ * by it's thread id, and the maps' bucket size.
+ * @param array of hash maps to aggregate
+ * @param threadId the thread number of the calling thread
+ * @param nThreads the number of threads executing reduction
+ */
+void mapReduce(HashMap** map, unsigned int threadId, unsigned int nThreads);
+
+/**
+ * Adds the two hashmaps together at the given bucket index.
+ * 'Add' means that entries with matching keys have their
+ * values added together, and unique keys from src are
+ * added to the destination map.
+ * The result is stored in the dest hashmap.
+ * @param dest first operand and result map to add
+ * @param src second operand map to add
+ * @param bucketIdx bucket index to add to maps at
+ */
+void mergeBuckets(HashMap* dest, HashMap* src, unsigned int bucketIdx);
+
+
+/**
+ * Increments the value for specified key by 1. If no
+ * key-value pair exists, one will be created with value 1.
+ * @param map pointer to map to put pair
+ * @param k Key of value to increment. 
+ * @param v Value to increment by.
+ */
+void addToBucket(HashMap* map, Key k, Value v = 1, unsigned int hash);
+
 
 #endif /* OPEN_MP_UTIL__H */

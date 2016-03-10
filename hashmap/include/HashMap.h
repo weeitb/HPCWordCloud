@@ -16,7 +16,7 @@
 
 typedef uint32_t Hash;
 typedef void* Key;
-typedef int32_t Value;
+typedef uint32_t Value;
 
 /**
  * Maps an arbitrary key into a numeric value. If the function returns a result
@@ -83,9 +83,10 @@ Value get(HashMap* map, Key k);
  * Increments the value for specified key by 1. If no
  * key-value pair exists, one will be created with value 1.
  * @param map pointer to map to put pair
- * @param key of value to increment. 
+ * @param k key of value to increment. 
+ * @param v Value to increment by. Defaults to 1.
  */
-void incrementKeyValue(HashMap* map, Key k);
+void incrementKeyValue(HashMap* map, Key k, Value v = 1);
 
 /**
  * Deletes the map and frees memory allocated for it's contents.

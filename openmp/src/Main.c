@@ -47,11 +47,11 @@ int main(int argc, char** argv) {
   #pragma omp parallel
   {
     int tid = omp_get_thread_num();
+    int nThreads = openmp_get_num_threads();
     // We have to do this here because we don't know the number of threads
     // before we enter a parallel region.
     if (tid == 0) {
-      int nThreads = openmp_get_num_threads();
-      maps = (HashMap**) malloc(sizeof(HashMap*));
+      maps = (HashMap**) malloc(sizeof(HashMap*) * nThreads);
     }
     // Wait for thread 1 to finish allocating space for all maps.
     #pragma omp barrier
@@ -76,17 +76,28 @@ int main(int argc, char** argv) {
     }
     // wait until all threads get here to map reduce
     #pragma omp barrier
-    
+    mapReduce(map, tid, nThreads);
+    // free all maps that were allocated for other threads.
+    // result is in map[0]
+    if (tid != 0) {
+      deleteMap(map[tid]);
+    }
   }
   /** End OpenMP Parallel region **/
+  // TODO: We could possibly parallelize this operation.
+  MapElement* elements = map2Array(map[0]);
+  sortArray(elements, map->nElements);
+
+  printf("Top 10 words:\n");
+  for(i = 0; i < 10; i++) {
+    printf("%d\t%s\t%d\n", i, (char*)elements[i]->k, elements[i]->v);
+  }
   
-  /* MapElement* elements = map2Array(map); */
-  /* sortArray(elements, map->nElements); */
-  
-  /* deleteMapArray(elements, map->nElements); */
-  /* printf("nElements is %d\n", map->nElements); */
-  /* deleteMap(map); */
+  deleteMapArray(elements, map->nElements);
+  printf("There are %d unique words.\n", map->nElements);
+  deleteMap(map[0]);
   stop = openmp_get_wtime();
+  free(map);
   double time_spent = (double)(stop - start);
   printf("Time spent executing is %.5e\n", time_spent);
   return 0;

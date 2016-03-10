@@ -57,9 +57,10 @@ Value get(HashMap* map, Key k) {
  * Increments the value for specified key by 1. If no
  * key-value pair exists, one will be created with value 1.
  * @param map pointer to map to put pair
- * @param key of value to increment. 
+ * @param k Key of value to increment. 
+ * @param v Value to increment by.
  */
-void incrementKeyValue(HashMap* map, Key k) {
+void incrementKeyValue(HashMap* map, Key k, Value v = 1) {
   Hash hash = (*map->hasher)(k) % map->nBuckets;
   MapNode* node = map->buckets[hash];
   // check if our bucket is empty. If it is We need to point
@@ -68,7 +69,7 @@ void incrementKeyValue(HashMap* map, Key k) {
   MapNode* prevNode = node;
   while(node != NULL) {
     if (map->comparator(k, node->k) == 0) {
-      ++node->v;
+      node->v += v;
       return;
     }
     prevNode = node;
@@ -83,7 +84,7 @@ void incrementKeyValue(HashMap* map, Key k) {
   }
   map->nElements++;
   node->nextNode = NULL;
-  node->v = 1;
+  node->v = v;
   // Copy the key so we have our own local copy.
   node->k = (*map->keyCopy)(k);
   if (prevNode != NULL) {

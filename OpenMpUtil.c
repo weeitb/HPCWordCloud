@@ -5,7 +5,7 @@
  * Create a new empty stack
  * @return pointer to new allocated stack.
  */
-FileNameStack* newStack() {
+FilenameStack* newStack() {
   FilenameStack* stack = (FilenameStack*) malloc(sizeof(FilenameStack));
   stack->nextNode = NULL;
   stack-> nElements = 0;
@@ -48,7 +48,7 @@ void push(FilenameStack* stack, char* filename) {
  * @param stack to pop off of.
  * @return filename string. Null if stack empty.
  */
-char* filename pop(FileNameStack* stack) {
+char* filename pop(FilenameStack* stack) {
   if (stack->front != NULL) {
     FilenameElement* element = stack->front;
     stack->front = element->nextNode;
@@ -97,11 +97,50 @@ void mapReduce(HashMap** map, unsigned int threadId, unsigned int nThreads) {
  * @param src second operand map to add
  * @param bucketIdx bucket index to add to maps at
  */
-void addMaps(HashMap* dest, HashMap* src, unsigned int bucketIdx) {
+void mergeBuckets(HashMap* dest, HashMap* src, unsigned int bucketIdx) {
   MapNode* currentBucket = src->buckets[bucketIdx];
 
   while(currentBucket != NULL) {
-    
+    addToBucket(dest, currentBucket->k, currentBucket->v, bucketIdx);
     currentBucket = currentBucket->nextNode;
+  }
+}
+
+
+/**
+ * Increments the value for specified key by 1. If no
+ * key-value pair exists, one will be created with value 1.
+ * @param map pointer to map to put pair
+ * @param k Key of value to increment. 
+ * @param v Value to increment by.
+ */
+void addToBucket(HashMap* map, Key k, Value v = 1, unsigned int hash) {
+  MapNode* node = map->buckets[hash];
+  // check if our bucket is empty. If it is We need to point
+  // it to it's first element when it's created later.
+  char bucketIsEmpty = node == NULL;
+  MapNode* prevNode = node;
+  while(node != NULL) {
+    if (map->comparator(k, node->k) == 0) {
+      node->v += v;
+      return;
+    }
+    prevNode = node;
+    node = node->nextNode;
+  }
+  
+  node = (MapNode*) malloc(sizeof(MapNode));
+
+  // Add it as the first element in bucket
+  if (bucketIsEmpty) { 
+    map->buckets[hash] = node;
+  }
+  map->nElements++;
+  node->nextNode = NULL;
+  node->v = v;
+  // Copy the key so we have our own local copy.
+  node->k = (*map->keyCopy)(k);
+  if (prevNode != NULL) {
+    prevNode->nextNode = node;
   }
 }
