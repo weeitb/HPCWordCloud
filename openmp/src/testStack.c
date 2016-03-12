@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include "OpenMPUtil.h"
 
 int main(int argc, char** argv) {
@@ -6,7 +8,7 @@ int main(int argc, char** argv) {
   char name2[] = "my name is";
   char name3[] = "bob";
   char* nullChar = pop(stack);
-  if (nullChar == null) {
+  if (nullChar == NULL) {
     printf("it's null!\n");
   }
   push(stack, name1);
@@ -14,10 +16,12 @@ int main(int argc, char** argv) {
   push(stack, name3);
   printf("%s\n", pop(stack));
   printf("%s\n", pop(stack));
+  push(stack, name1);
+  printf("%s\n", pop(stack));
   printf("%s\n", pop(stack));
 
   nullChar = pop(stack);
-  if (nullChar == null) {
+  if (nullChar == NULL) {
     printf("it's null!\n");
   }
   deleteStack(stack);

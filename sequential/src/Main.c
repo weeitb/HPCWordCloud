@@ -47,10 +47,10 @@ int main(int argc, char** argv) {
   MapElement* elements = map2Array(map);
   sortArray(elements, map->nElements);
   
-  //  int i;
-  //for (i = 0; i < 10; i++) {
-  //  printf("%s\t%d\n", (char*) elements[i].k, elements[i].v);
-  //}
+  int i;
+  for (i = 0; i < 10; i++) {
+    printf("%s\t%d\n", (char*) elements[i].k, elements[i].v);
+  }
   deleteMapArray(elements, map->nElements);
   printf("nElements is %d\n", map->nElements);
   deleteMap(map);

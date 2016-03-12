@@ -22,6 +22,10 @@ MapElement* map2Array(const HashMap* map) {
   for (i = 0; i < map->nBuckets; i++) {
     node = map->buckets[i];
     while(node != NULL) {
+      if (j > map->nElements) {
+	printf("we had an oopsie\n");
+	return;
+      }
       elements[j].v = node->v;
       elements[j].k = (*map->keyCopy)(node->k);
       j++;

@@ -10,6 +10,7 @@
  * @Author Wyatt Bertorelli <wyattbertorelli@gmail.com>
  */
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "HashMap.h"
 
@@ -53,15 +54,18 @@ Value get(HashMap* map, Key k) {
   return 0;
 }
 
+
 /**
  * Increments the value for specified key by 1. If no
  * key-value pair exists, one will be created with value 1.
  * @param map pointer to map to put pair
  * @param k Key of value to increment. 
- * @param v Value to increment by.
  */
-void incrementKeyValue(HashMap* map, Key k, Value v = 1) {
+void incrementKeyValue(HashMap* map, Key k) {
   Hash hash = (*map->hasher)(k) % map->nBuckets;
+  //  if (hash > 2000) {
+  //printf("we got one at %d\n", hash);
+  //}
   MapNode* node = map->buckets[hash];
   // check if our bucket is empty. If it is We need to point
   // it to it's first element when it's created later.
@@ -69,7 +73,7 @@ void incrementKeyValue(HashMap* map, Key k, Value v = 1) {
   MapNode* prevNode = node;
   while(node != NULL) {
     if (map->comparator(k, node->k) == 0) {
-      node->v += v;
+      node->v += 1;
       return;
     }
     prevNode = node;
@@ -84,7 +88,7 @@ void incrementKeyValue(HashMap* map, Key k, Value v = 1) {
   }
   map->nElements++;
   node->nextNode = NULL;
-  node->v = v;
+  node->v = 1;
   // Copy the key so we have our own local copy.
   node->k = (*map->keyCopy)(k);
   if (prevNode != NULL) {

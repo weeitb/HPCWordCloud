@@ -84,13 +84,14 @@ Value get(HashMap* map, Key k);
  * key-value pair exists, one will be created with value 1.
  * @param map pointer to map to put pair
  * @param k key of value to increment. 
- * @param v Value to increment by. Defaults to 1.
+ * @param v Value to increment by.
  */
-void incrementKeyValue(HashMap* map, Key k, Value v = 1);
+void incrementKeyValue(HashMap* map, Key k);
 
 /**
  * Deletes the map and frees memory allocated for it's contents.
  * @param map map to delete
  */
 void deleteMap(HashMap* map);
+
 #endif /* HASH_MAP__H */

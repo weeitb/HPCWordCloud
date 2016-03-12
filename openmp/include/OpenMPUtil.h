@@ -1,5 +1,7 @@
 #ifndef OPEN_MP_UTIL__H
 #define OPEN_MP_UTIL__H
+
+#include "HashMap.h"
 /**
  * Utility data structures and functions for openmp
  * implementation.
@@ -12,7 +14,7 @@
  */
 typedef struct FilenameElements {
   char* filename;
-  struct FileNameElements* nextNode;
+  struct FilenameElements* nextNode;
 } FilenameElement;
 
 /**
@@ -58,7 +60,7 @@ void push(FilenameStack* stack, char* filename);
  * @param stack to pop off of.
  * @return filename string. Null if stack empty.
  */
-char* filename pop(FilenameStack* stack);
+char* pop(FilenameStack* stack);
 
 /**
  * Aggregates the results of each hashmap into the map at index 0.
@@ -80,7 +82,7 @@ void mapReduce(HashMap** map, unsigned int threadId, unsigned int nThreads);
  * @param src second operand map to add
  * @param bucketIdx bucket index to add to maps at
  */
-void mergeBuckets(HashMap* dest, HashMap* src, unsigned int bucketIdx);
+unsigned int mergeBuckets(HashMap* dest, HashMap* src, unsigned int bucketIdx);
 
 
 /**
@@ -89,8 +91,9 @@ void mergeBuckets(HashMap* dest, HashMap* src, unsigned int bucketIdx);
  * @param map pointer to map to put pair
  * @param k Key of value to increment. 
  * @param v Value to increment by.
+ * @return 1 if value added, 0 if merged with an existing.
  */
-void addToBucket(HashMap* map, Key k, Value v = 1, unsigned int hash);
+unsigned int addToBucket(HashMap* map, Key k, Value v, unsigned int hash);
 
 
 #endif /* OPEN_MP_UTIL__H */
