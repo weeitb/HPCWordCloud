@@ -14,6 +14,8 @@
 
 int main(int argc, char** argv) {
   double start, stop;
+  double stop_read;
+  double stop_reduce;
   start = omp_get_wtime();
   if (argc < 4) {
     printf("Insufficient arguments provided to function. Please specify:\n <directory of files to parse> ((good) | (bad)) <number of hashmap bins>\n");
@@ -60,25 +62,24 @@ int main(int argc, char** argv) {
     // only one thread can access the stack at a time to prevent multiple stacks
     // from accidentally reading the same file.
     char* filename;
-    #pragma omp critical
-    {
     filename = pop(stack);
-    }
     while(filename != NULL) {
       // most of the time spent should be here, so collisions should in theory
       // not cause a large performance impact.
       readFile(filename, 0, maps[tid]);
       free(filename);
-      // only one thread can access stack at a time.
-      #pragma omp critical
-      {
       filename = pop(stack);
-      }
     }
     // wait until all threads get here to map reduce
     #pragma omp barrier
+    if (tid == 0) {
+      stop_read = omp_get_wtime();
+    }
     mapReduce(maps, tid, nThreads);
     #pragma omp barrier
+    if (tid == 0) {
+      stop_reduce = omp_get_wtime();
+    }
     // free all maps that were allocated for other threads.
     // result is in map[0]
     if (tid != 0) {
@@ -87,19 +88,21 @@ int main(int argc, char** argv) {
       // TODO: We could possibly parallelize this transformation and sort.
       MapElement* elements = map2Array(maps[0]);
       sortArray(elements, maps[0]->nElements);
-      printf("Top 10 words:\n");
-      int i;
-      for(i = 0; i < 10; i++) {
-    	printf("%d\t%s\t%d\n", i, (char*)elements[i].k, elements[i].v);
-      }
+      //printf("Top 10 words:\n");
+      //int i;
+      //for(i = 0; i < 10; i++) {
+      //printf("%d\t%s\t%d\n", i, (char*)elements[i].k, elements[i].v);
+      //}
   
       deleteMapArray(elements, maps[0]->nElements);
-      printf("There are %d unique words.\n", maps[0]->nElements);
+      //printf("There are %d unique words.\n", maps[0]->nElements);
       deleteMap(maps[0]);
       stop = omp_get_wtime();
       free(maps);
       double time_spent = (double)(stop - start);
-      printf("Time spent executing is %.5e\n", time_spent);
+      printf("%.5e,", stop_read - start);
+      printf("%.5e,", stop_reduce - stop_read);
+      printf("%.5e\n", time_spent);
     }
   }
   /** End OpenMP Parallel region **/

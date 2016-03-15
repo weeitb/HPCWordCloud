@@ -1,0 +1,101 @@
+Sender: LSF System <lsfadmin@compute-0-007>
+Subject: Job 603555: <bertore_WordCountSeq> in cluster <mghpcc_cluster1> Done
+
+Job <bertore_WordCountSeq> was submitted from host <discovery4> by user <bertorelli.w> in cluster <mghpcc_cluster1>.
+Job was executed on host(s) <10*compute-0-007>, in queue <ht-10g>, as user <bertorelli.w> in cluster <mghpcc_cluster1>.
+</home/bertorelli.w> was used as the home directory.
+</home/bertorelli.w/project/HPCWordCloudOpenMP/sequential> was used as the working directory.
+Started at Tue Mar 15 13:21:05 2016
+Results reported at Tue Mar 15 13:21:36 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -J  bertore_WordCountSeq
+#BSUB -o output_log
+#BSUB -e error_log
+#BSUB -n 10
+#BSUB -q ht-10g
+#BSUB cwd /home/bertorelli.w/project/HPCWordCloudOpenMP/sequential
+work=/home/bertorelli.w/project/HPCWordCloudOpenMP/sequential
+cd $work
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+
+# sleep 1
+# ./sequential ../resources/bibleChapters/ good 100
+# sleep 1
+# ./sequential ../resources/bibleChapters/ good 1000
+# sleep 1
+# ./sequential ../resources/bibleChapters/ good 10000
+# sleep 1
+# ./sequential ../resources/bibleChapters/ good 100000
+
+# echo "running algorithm with bad hasher, bins ranging from 100 - 100000"
+# ./sequential ../resources/bibleChapters/ bad 10
+# sleep 1
+# ./sequential ../resources/bibleChapters/ bad 100
+# sleep 1
+# ./sequential ../resources/bibleChapters/ bad 1000
+# sleep 1
+# ./sequential ../resources/bibleChapters/ bad 10000
+# sleep 1
+# ./sequential ../resources/bibleChapters/ bad 100000
+
+
+(... more ...)
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :               15.50 sec.
+    Max Memory :             14 MB
+    Average Memory :         14.00 MB
+    Total Requested Memory : -
+    Delta Memory :           -
+    (Delta: the difference between total requested memory and actual max usage.)
+    Max Swap :               57 MB
+
+    Max Processes :          1
+    Max Threads :            1
+
+The output (if any) follows:
+
+1.60000e+00
+1.50000e+00
+1.51000e+00
+1.50000e+00
+1.50000e+00
+1.51000e+00
+1.50000e+00
+1.50000e+00
+1.50000e+00
+1.50000e+00
+
+
+PS:
+
+Read file <error_log> for stderr output of this job.
+

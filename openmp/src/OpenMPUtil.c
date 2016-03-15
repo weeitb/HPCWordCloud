@@ -54,9 +54,13 @@ void push(FilenameStack* stack, char* filename) {
  */
 char* pop(FilenameStack* stack) {
   if (stack->front != NULL) {
-    FilenameElement* element = stack->front;
-    stack->front = element->nextNode;
-    stack->nElements--;
+    FilenameElement* element;
+    #pragma omp critical
+    {
+      element = stack->front;
+      stack->front = element->nextNode;
+      stack->nElements--;
+    }
     char* filename = element->filename;
     free(element);
     return filename;

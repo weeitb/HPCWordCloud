@@ -1,0 +1,150 @@
+Sender: LSF System <lsfadmin@compute-0-005>
+Subject: Job 603551: <bertore_WordCountOMP> in cluster <mghpcc_cluster1> Done
+
+Job <bertore_WordCountOMP> was submitted from host <discovery4> by user <bertorelli.w> in cluster <mghpcc_cluster1>.
+Job was executed on host(s) <compute-0-005>, in queue <ht-10g>, as user <bertorelli.w> in cluster <mghpcc_cluster1>.
+</home/bertorelli.w> was used as the home directory.
+</home/bertorelli.w/project/HPCWordCloudOpenMP/openmp> was used as the working directory.
+Started at Tue Mar 15 13:12:19 2016
+Results reported at Tue Mar 15 13:13:37 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -J  bertore_WordCountOMP
+#BSUB -o output_log
+#BSUB -e error_log
+#BSUB -n 1
+#BSUB -q ht-10g
+#BSUB cwd /home/bertorelli.w/project/HPCWordCloudOpenMP/openmp
+work=/home/bertorelli.w/project/HPCWordCloudOpenMP/openmp
+cd $work
+
+export OMP_NUM_THREADS=4
+ ./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+export OMP_NUM_THREADS=8
+ ./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+export OMP_NUM_THREADS=16
+ ./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+export OMP_NUM_THREADS=24
+ ./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+export OMP_NUM_THREADS=32
+ ./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+
+echo ""
+
+export OMP_NUM_THREADS=4
+ ./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+export OMP_NUM_THREADS=8
+ ./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+export OMP_NUM_THREADS=16
+ ./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+export OMP_NUM_THREADS=24
+ ./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+export OMP_NUM_THREADS=32
+ ./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+
+echo ""
+
+export OMP_NUM_THREADS=4
+ ./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+export OMP_NUM_THREADS=8
+
+(... more ...)
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :               175.99 sec.
+    Max Memory :             14 MB
+    Average Memory :         6.67 MB
+    Total Requested Memory : -
+    Delta Memory :           -
+    (Delta: the difference between total requested memory and actual max usage.)
+    Max Swap :               325 MB
+
+    Max Processes :          4
+    Max Threads :            5
+
+The output (if any) follows:
+
+1.19182e+00,2.22763e-02,1.23135e+00
+3.63368e-01,2.59652e-02,4.10252e-01
+3.52913e-01,2.61173e-02,3.99234e-01
+4.46512e-01,3.56319e-02,5.06195e-01
+4.55461e-01,4.03286e-02,5.16585e-01
+
+8.48198e-01,1.74476e-02,8.82920e-01
+3.59965e-01,2.61274e-02,4.00747e-01
+3.53995e-01,2.20581e-02,3.95744e-01
+4.41265e-01,4.68405e-02,5.08581e-01
+4.59739e-01,6.81579e-02,5.47879e-01
+
+8.20704e-01,2.03792e-02,8.61298e-01
+3.65517e-01,2.65346e-02,4.12116e-01
+3.50671e-01,2.13948e-02,3.91723e-01
+4.47307e-01,1.95580e-02,4.86973e-01
+4.38940e-01,4.93669e-02,5.10731e-01
+
+4.93082e-01,9.61503e-03,5.09896e-01
+3.58031e-01,2.06950e-02,3.93237e-01
+3.41381e-01,2.18490e-02,3.87236e-01
+4.37187e-01,4.51368e-02,5.17457e-01
+4.74706e-01,1.22381e-01,6.17512e-01
+
+7.91896e-01,2.20960e-02,8.31069e-01
+3.55333e-01,2.13052e-02,3.91357e-01
+3.42655e-01,2.07553e-02,3.83328e-01
+4.73912e-01,2.34125e-02,5.17693e-01
+4.43544e-01,5.30134e-02,5.16640e-01
+
+7.52687e-01,2.44063e-02,7.94580e-01
+3.63030e-01,2.72869e-02,4.05512e-01
+3.50499e-01,2.17253e-02,3.95539e-01
+4.51732e-01,5.79903e-02,5.29882e-01
+4.66494e-01,9.76973e-02,5.86596e-01
+
+7.96247e-01,2.29381e-02,8.36559e-01
+2.24157e-01,9.73332e-03,2.40969e-01
+3.60437e-01,2.18273e-02,4.02039e-01
+4.38479e-01,2.14772e-02,4.80137e-01
+4.66502e-01,4.46153e-02,5.31035e-01
+
+8.04163e-01,2.29469e-02,8.44510e-01
+3.60906e-01,2.09861e-02,3.98933e-01
+3.54993e-01,2.22668e-02,3.97140e-01
+4.70127e-01,3.50075e-02,5.25165e-01
+7.41080e-01,1.24039e-01,8.85271e-01
+
+8.11061e-01,2.37089e-02,8.54267e-01
+3.61671e-01,2.09628e-02,4.03149e-01
+3.53217e-01,2.16733e-02,3.94516e-01
+4.33807e-01,3.13360e-02,4.85081e-01
+4.72472e-01,4.13329e-02,5.34110e-01
+
+8.05160e-01,1.74598e-02,8.35304e-01
+3.63248e-01,3.00535e-02,4.07937e-01
+3.47850e-01,2.17080e-02,3.89083e-01
+4.51816e-01,4.81237e-02,5.19862e-01
+4.53881e-01,1.03211e-01,5.77100e-01
+
+
+PS:
+
+Read file <error_log> for stderr output of this job.
+

@@ -7,8 +7,27 @@
 #BSUB cwd /home/bertorelli.w/project/HPCWordCloudOpenMP/sequential
 work=/home/bertorelli.w/project/HPCWordCloudOpenMP/sequential
 cd $work
-echo "running algorithm with good hasher, bins ranging from 100 - 100000"
 ./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+
 # sleep 1
 # ./sequential ../resources/bibleChapters/ good 100
 # sleep 1

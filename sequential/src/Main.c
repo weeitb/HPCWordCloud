@@ -47,15 +47,15 @@ int main(int argc, char** argv) {
   MapElement* elements = map2Array(map);
   sortArray(elements, map->nElements);
   
-  int i;
-  for (i = 0; i < 10; i++) {
-    printf("%s\t%d\n", (char*) elements[i].k, elements[i].v);
-  }
+  //  int i;
+  //  for (i = 0; i < 10; i++) {
+  //    printf("%s\t%d\n", (char*) elements[i].k, elements[i].v);
+  //  }
   deleteMapArray(elements, map->nElements);
-  printf("nElements is %d\n", map->nElements);
+  //  printf("nElements is %d\n", map->nElements);
   deleteMap(map);
   stop = clock();
   double time_spent = (double)(stop - start) / CLOCKS_PER_SEC;
-  printf("Time spent executing is %.5e\n", time_spent);
+  printf("%.5e\n", time_spent);
   return 0;
 }
