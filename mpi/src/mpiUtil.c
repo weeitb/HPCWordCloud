@@ -71,12 +71,17 @@ char* pop(FilenameStack* stack) {
  * Converts a hashmap into a contigious block of memory for
  * sending.
  */
-void* serializeMap(HashMap* map) {
-  uint32_t bytesToAllocate = map->nBytes;
-  char* data = (char*)malloc(bytesToAllocate);
+char* serializeMap(HashMap* map, uint32_t* nBytes) {
+  // add 4 bytes to store the number of elements at front.
+  *nBytes = map->nBytes + 4;
+  //printf("allocating %d bytes for serialization\n", *nBytes);
+  char* data = (char*)malloc((*nBytes) * sizeof(char));
+  char* startData = data;
   int bucketIdx = 0;
   int j = 0;
+  //printf("writing integer %d to first block\n", map->nElements);
   *data++ = map->nElements & 0xff;
+  //  printf("first byte %d\n", *(data - 1));
   *data++ = (map->nElements >>  8) & 0xff;
   *data++ = (map->nElements >> 16) & 0xff;
   *data++ = (map->nElements >> 24) & 0xff;
@@ -85,6 +90,7 @@ void* serializeMap(HashMap* map) {
     currentBucket = map->buckets[bucketIdx];
     data = serializeBuckets(data, currentBucket);
   }
+  return startData;
 }
 
 /**
@@ -96,18 +102,18 @@ void* serializeMap(HashMap* map) {
  */
 inline char* serializeBuckets(char* data, MapNode* bucket) {
   char* key;
-  while (currentBucket != NULL) {
+  while (bucket != NULL) {
     // convert a uint32_t to 4 characters
-    *data++ = currentBucket->v & 0xff;
-    *data++ = (currentBucket->v >>  8) & 0xff;
-    *data++ = (currentBucket->v >> 16) & 0xff;
-    *data++ = (currentBucket->v >> 24) & 0xff;
-    key = (char*) currentBucket->k;
+    *data++ = bucket->v & 0xff;
+    *data++ = (bucket->v >>  8) & 0xff;
+    *data++ = (bucket->v >> 16) & 0xff;
+    *data++ = (bucket->v >> 24) & 0xff;
+    key = (char*) bucket->k;
     // copy the string including the null terminator.
     // we will use the null terminator to split data
     // on the receiving end.
-    while((*data++ = *key++) != 0);
-    currentBucket = currentbucket->nextNode;
+    while((*data++ = *key++) != 0);//printf("%c ", *(data - 1));
+    bucket = bucket->nextNode;
   }
   return data;
 }
@@ -128,7 +134,7 @@ inline char* unserializeBucket(Value* v, Key* k, char* data) {
   // set pointer of string to read to start of string.
   *k = data;
   // increment data to start of next chunk.
-  while(*data++);
+  while(*data++);// printf("%c ", *(data - 1));
   return data;
 }
 
@@ -140,17 +146,18 @@ inline char* unserializeBucket(Value* v, Key* k, char* data) {
  */
 void addSerializedToMap(HashMap* map, char* data) {
   uint32_t nElements;
-  nElements |= *data++;
+  nElements = *data++;
   nElements |= *data++  << 8;
   nElements |= *data++  << 16;
   nElements |= *data++  << 24;
+  //printf("number of elements %d\n", nElements);
   uint32_t elementIdx = 0;
   Key k;
   Value v;
   unsigned int hash;
   for (elementIdx = 0; elementIdx < nElements; elementIdx++) {
     data = unserializeBucket(&v, &k, data);
-    hash = (*map->hasher)(k) % map->nbuckets;
+    hash = (*map->hasher)(k) % map->nBuckets;
     // A little inefficient, we could copy location information in message.
     map->nElements += addToBucket(map, k, v, hash);
   }

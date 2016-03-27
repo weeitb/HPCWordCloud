@@ -1,5 +1,28 @@
+#ifndef MPI_UTIL__H
+#define MPI_UTIL__H
+
 #include "mpiUtil.h"
 #include "HashMap.h"
+
+/**
+ * Element for for filename stack data structure.
+ */
+typedef struct FilenameElements {
+  char* filename;
+  struct FilenameElements* nextNode;
+} FilenameElement;
+
+/**
+ * Stack data structure for holding list of files to parse.
+ * Designed so that each thread or process can pop a file off
+ * the stack to process. Mutation of this data structure must 
+ * be surrounded with a critical section, so that multiple
+ * threads do not end up working on the same files.
+ */
+typedef struct FilenameStacks {
+  FilenameElement* front;
+  unsigned int nElements;
+} FilenameStack;
 
 /**
  * Create a new empty stack
@@ -36,8 +59,11 @@ char* pop(FilenameStack* stack);
 /**
  * Converts a hashmap into a contigious block of memory for
  * sending.
+ * @param map map to serialize
+ * @param nBytes serialized block size.
+ * @return pointer to serialized block of data
  */
-void* serializeMap(HashMap* map);
+char* serializeMap(HashMap* map, uint32_t* nBytes);
 
 /**
  * Takes in a linked list of map nodes and serliazes them to
@@ -63,7 +89,7 @@ inline char* unserializeBucket(Value* v, Key* k, char* data);
  * @param map map to add serialized key value pairs to
  * @param data serialized key value pairs to parse
  */
-void addSerializedToMap(HashMap* map, char* data, uint32_t dataLen);
+void addSerializedToMap(HashMap* map, char* data);
 
 /**
  * Increments the value for specified key by 1. If no
@@ -74,3 +100,5 @@ void addSerializedToMap(HashMap* map, char* data, uint32_t dataLen);
  * @param 1 if added. 0 if merged with existing.
  */
 unsigned int addToBucket(HashMap* map, Key k, Value v, unsigned int hash);
+
+#endif /* MPI_UTIL__H */

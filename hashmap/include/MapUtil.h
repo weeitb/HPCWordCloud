@@ -65,8 +65,9 @@ int32_t stringComparator(const Key strKA, const Key strKB);
 /**
  * Create a new copy of input string.
  * @param strK String to copy (casted as void*)
+ * @param strLen length of string copied.
  * @return pointer to new copy (casted as void*)
  */
-Key stringCopy(const Key strK);
+Key stringCopy(const Key strK, int* strLen);
 
 #endif /* MAP_UTIL__H */
