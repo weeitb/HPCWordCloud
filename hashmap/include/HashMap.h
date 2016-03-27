@@ -37,7 +37,7 @@ typedef int32_t (*Comparator)(const Key kA, const Key kB);
 /**
  * Key copy function so we can own a copy to store in map.
  */
-typedef Key (*KeyCopy)(const Key k);
+typedef Key (*KeyCopy)(const Key k, int* keyLen);
 
 /**
  * Node datastructure. Contains a pointer to the next element
@@ -57,6 +57,7 @@ typedef struct HashMaps {
   MapNode** buckets;
   uint32_t nBuckets;
   uint32_t nElements;
+  uint32_t nBytes;
   Hasher hasher;
   Comparator comparator;
   KeyCopy keyCopy;

@@ -34,6 +34,7 @@ HashMap* newMap(uint32_t nBuckets, Hasher hasher, Comparator comparator, KeyCopy
   }
   map->nBuckets = nBuckets;
   map->nElements = 0;
+  map->nBytes = 0;
   return map;
 }
 
@@ -90,7 +91,11 @@ void incrementKeyValue(HashMap* map, Key k) {
   node->nextNode = NULL;
   node->v = 1;
   // Copy the key so we have our own local copy.
-  node->k = (*map->keyCopy)(k);
+  int keyLen;
+  node->k = (*map->keyCopy)(k, &keyLen);
+  // Keep track of total memory used for map. This allows
+  // for serialization later.
+  map->nBytes += sizeof(Value) + sizeof(char) * (keyLen + 1);
   if (prevNode != NULL) {
     prevNode->nextNode = node;
   }

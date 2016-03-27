@@ -19,6 +19,7 @@ MapElement* map2Array(const HashMap* map) {
   MapElement* elements = (MapElement*) malloc(map->nElements * sizeof(MapElement));
   MapNode* node;
   int j = 0;
+  int keyLen;
   for (i = 0; i < map->nBuckets; i++) {
     node = map->buckets[i];
     while(node != NULL) {
@@ -27,7 +28,7 @@ MapElement* map2Array(const HashMap* map) {
 	return;
       }
       elements[j].v = node->v;
-      elements[j].k = (*map->keyCopy)(node->k);
+      elements[j].k = (*map->keyCopy)(node->k, &keyLen);
       j++;
       node = node->nextNode;
     }
@@ -116,8 +117,9 @@ int32_t stringComparator(const Key kA, const Key kB) {
  * @param strK String to copy (casted as void*)
  * @return pointer to new copy (casted as void*)
  */
-Key stringCopy(const Key strK) {
-  char* newCopy = malloc(sizeof(char) * strlen((char*) strK));
+Key stringCopy(const Key strK, int* keyLen) {
+  *keyLen = strlen((char*) strK);
+  char* newCopy = malloc(sizeof(char) * (*keyLen));
   strcpy(newCopy, (char*) strK);
   return (Key) newCopy;
 }

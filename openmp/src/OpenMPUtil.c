@@ -152,7 +152,8 @@ unsigned int addToBucket(HashMap* map, Key k, Value v, unsigned int hash) {
   node->nextNode = NULL;
   node->v = v;
   // Copy the key so we have our own local copy.
-  node->k = (*map->keyCopy)(k);
+  int strLen;
+  node->k = (*map->keyCopy)(k, &strLen);
   if (prevNode != NULL) {
     prevNode->nextNode = node;
   }
