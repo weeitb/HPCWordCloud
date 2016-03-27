@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <mpi.h>
 
 #include "mpiUtil.h"
 #include "HashMap.h"
@@ -202,4 +203,39 @@ unsigned int addToBucket(HashMap* map, Key k, Value v, unsigned int hash) {
     prevNode->nextNode = node;
   }
   return 1;
+}
+
+
+/**
+ * Performs map reduce using mpi message passing.
+ * Assumes numprocs is a power of 2. The result will
+ * be stored in the map on process with rank 0.
+ * @param map local map to reduce
+ * @param rank mpi process rank
+ * @param numprocs number of mpi processes.
+ */
+void mapReduce(HashMap* map, int rank, int numprocs) {
+  int s;
+  int count;
+  MPI_Status status;
+  char* buffer;
+  for (s = numprocs / 2; s >= 0; s = s/2) {
+    if (rank < s) {
+      // Get the number of elements being sent to us.
+      MPI_Probe(rank + s, 0, MPI_COMM_WORLD, &status);
+      MPI_Get_count(&status, MPI_CHAR, &count);
+      // receive from higher process. merge data.
+      buffer = (char*)malloc(sizeof(char) * count);
+      MPI_Recv(buffer, count, MPI_CHAR, rank  + s, 0,
+	       MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+      // do stuff with data
+      free(buffer);
+    } else if (rank < 2 * s) {
+      // serialize hashmap for sending.
+      uint32_t nBytes;
+      buffer = serializeMap(map, &nBytes);
+      MPI_Send(buffer, nBytes, MPI_CHAR, rank - s, 0, MPI_COMM_WORLD);
+      free(buffer);
+    }
+  }
 }

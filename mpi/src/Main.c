@@ -11,6 +11,9 @@
 #include "MapUtil.h"
 #include "FileParser.h"
 #include "mpiUtil.h"
+
+// our input arguments are being redirected to
+// mpi. Define directory to read.
 #define READ_DIR_PATH "../resources/bibleChapters/"
 
 int main(int argc, char** argv) {
@@ -19,6 +22,7 @@ int main(int argc, char** argv) {
   double stop_reduce;
   int numprocs, rank;
   MPI_Init(&argc, &argv);
+  start = MPI_Wtime();
   MPI_Comm_size(MPI_COMM_WORLD, &numprocs);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   DIR* dp;
@@ -48,35 +52,37 @@ int main(int argc, char** argv) {
   char* filename;
   filename = pop(stack);
   while(filename != NULL) {
-      // most of the time spent should be here, so collisions should in theory
-      // not cause a large performance impact.
-      readFile(filename, 0, maps[tid]);
-      free(filename);
-      filename = pop(stack);
-    }
-  // TODO: Implement mapReduce in mpi.
-  //mapReduce(maps, tid, nThreads);
-
-      // TODO: We could possibly parallelize this transformation and sort.
-      MapElement* elements = map2Array(maps[0]);
-      sortArray(elements, maps[0]->nElements);
-      //printf("Top 10 words:\n");
-      //int i;
-      //for(i = 0; i < 10; i++) {
-      //printf("%d\t%s\t%d\n", i, (char*)elements[i].k, elements[i].v);
-      //}
-  
-      deleteMapArray(elements, maps[0]->nElements);
-      //printf("There are %d unique words.\n", maps[0]->nElements);
-      deleteMap(maps[0]);
-      stop = omp_get_wtime();
-      free(maps);
-      double time_spent = (double)(stop - start);
-      printf("%.5e,", stop_read - start);
-      printf("%.5e,", stop_reduce - stop_read);
-      printf("%.5e\n", time_spent);
-    }
+    // most of the time spent should be here, so collisions should in theory
+    // not cause a large performance impact.
+    readFile(filename, 0, map);
+    free(filename);
+    filename = pop(stack);
   }
-  /** End OpenMP Parallel region **/
+  stop_read = MPI_Wtime();
+  mapReduce(map, rank, numprocs);
+  stop_reduce = MPI_Wtime();
+
+  // We could possibly parallelize this transformation and sort.
+  if (rank == 0) {
+    MapElement* elements = map2Array(map);
+    sortArray(elements, map->nElements);
+    printf("Top 10 words:\n");
+    for(i = 0; i < 10; i++) {
+      printf("%d\t%s\t%d\n", i, (char*)elements[i].k, elements[i].v);
+    }
+  
+    deleteMapArray(elements, map->nElements);
+    //printf("There are %d unique words.\n", maps[0]->nElements);
+    deleteMap(map);
+    stop = MPI_Wtime();
+    printf("%.5e,", stop_read - start);
+    printf("%.5e,", stop_reduce - stop_read);
+    printf("%.5e\n", stop - start);
+  } else {
+    deleteMap(map);
+  }
+  
+  MPI_Finalize();
+  /** End mpi Parallel region **/
   return 0;
 }
