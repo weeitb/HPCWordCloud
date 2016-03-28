@@ -72,12 +72,12 @@ char* pop(FilenameStack* stack) {
  * Converts a hashmap into a contigious block of memory for
  * sending.
  */
-char* serializeMap(HashMap* map, uint32_t* nBytes) {
+unsigned char* serializeMap(HashMap* map, uint32_t* nBytes) {
   // add 4 bytes to store the number of elements at front.
   *nBytes = map->nBytes + 4;
   //printf("allocating %d bytes for serialization\n", *nBytes);
-  char* data = (char*)malloc((*nBytes) * sizeof(char));
-  char* startData = data;
+  unsigned char* data = (unsigned char*)malloc((*nBytes) * sizeof(char));
+  unsigned char* startData = data;
   int bucketIdx = 0;
   int j = 0;
   //printf("writing integer %d to first block\n", map->nElements);
@@ -91,6 +91,9 @@ char* serializeMap(HashMap* map, uint32_t* nBytes) {
     currentBucket = map->buckets[bucketIdx];
     data = serializeBuckets(data, currentBucket);
   }
+  if (data - startData + 1 > *nBytes) {
+    printf("We aren't bookeeping properly %d, %d\n", data - startData + 1, nBytes);
+  }
   return startData;
 }
 
@@ -101,15 +104,15 @@ char* serializeMap(HashMap* map, uint32_t* nBytes) {
  * @param  bucket start pointer of linked list of map elements.
  * @return updated pointer of data incremented past data serialized.
  */
-inline char* serializeBuckets(char* data, MapNode* bucket) {
-  char* key;
+inline unsigned char* serializeBuckets(unsigned char* data, MapNode* bucket) {
+  unsigned char* key;
   while (bucket != NULL) {
     // convert a uint32_t to 4 characters
     *data++ = bucket->v & 0xff;
     *data++ = (bucket->v >>  8) & 0xff;
     *data++ = (bucket->v >> 16) & 0xff;
     *data++ = (bucket->v >> 24) & 0xff;
-    key = (char*) bucket->k;
+    key = (unsigned char*) bucket->k;
     // copy the string including the null terminator.
     // we will use the null terminator to split data
     // on the receiving end.
@@ -126,7 +129,7 @@ inline char* serializeBuckets(char* data, MapNode* bucket) {
  * in data chunk.
  * @return updated data pointer position after reading bucket.
  */
-inline char* unserializeBucket(Value* v, Key* k, char* data) {
+inline unsigned char* unserializeBucket(Value* v, Key* k, unsigned char* data) {
   // unpack serialized int.
   *v = *data++;
   *v |= *data++ << 8;
@@ -145,22 +148,24 @@ inline char* unserializeBucket(Value* v, Key* k, char* data) {
  * @param map map to add serialized key value pairs to
  * @param data serialized key value pairs to parse
  */
-void addSerializedToMap(HashMap* map, char* data) {
+void addSerializedToMap(HashMap* map, unsigned char* data, int nBytes) {
   uint32_t nElements;
+  //unsigned char* startPtr = data;
   nElements = *data++;
-  nElements |= *data++  << 8;
-  nElements |= *data++  << 16;
-  nElements |= *data++  << 24;
+  nElements |= *data++ << 8;
+  nElements |= *data++ << 16;
+  nElements |= *data++ << 24;
+  //printf("nElements is %d", nElements);
   //printf("number of elements %d\n", nElements);
   uint32_t elementIdx = 0;
   Key k;
   Value v;
   unsigned int hash;
   for (elementIdx = 0; elementIdx < nElements; elementIdx++) {
-    data = unserializeBucket(&v, &k, data);
-    hash = (*map->hasher)(k) % map->nBuckets;
-    // A little inefficient, we could copy location information in message.
-    map->nElements += addToBucket(map, k, v, hash);
+     data = unserializeBucket(&v, &k, data);
+     hash = (*map->hasher)(k) % map->nBuckets;
+     //A little inefficient, we could copy location information in message.
+     map->nElements += addToBucket(map, k, v, hash);
   }
 }
 
@@ -195,7 +200,7 @@ unsigned int addToBucket(HashMap* map, Key k, Value v, unsigned int hash) {
   }
   node->nextNode = NULL;
   node->v = v;
-  unsigned int strLen;
+  int strLen;
   map->nBytes += sizeof(Value) + sizeof(char) * (strLen + 1);
   // Copy the key so we have our own local copy.
   node->k = (*map->keyCopy)(k, &strLen);
@@ -219,21 +224,25 @@ void mapReduce(HashMap* map, int rank, int numprocs) {
   int count;
   MPI_Status status;
   char* buffer;
-  for (s = numprocs / 2; s >= 0; s = s/2) {
+  for (s = numprocs / 2; s > 0; s = s/2) {
     if (rank < s) {
       // Get the number of elements being sent to us.
+      //printf("getting next reduce for rank %d\n", rank);
       MPI_Probe(rank + s, 0, MPI_COMM_WORLD, &status);
       MPI_Get_count(&status, MPI_CHAR, &count);
       // receive from higher process. merge data.
       buffer = (char*)malloc(sizeof(char) * count);
+      //printf("received %d bytes at %d from %d\n", count, rank, rank + s);
       MPI_Recv(buffer, count, MPI_CHAR, rank  + s, 0,
 	       MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       // do stuff with data
+      addSerializedToMap(map, (unsigned char*) buffer, count);
+      //printf("finished reduce at %d\n", rank);
       free(buffer);
     } else if (rank < 2 * s) {
       // serialize hashmap for sending.
       uint32_t nBytes;
-      buffer = serializeMap(map, &nBytes);
+      buffer = (char*)serializeMap(map, &nBytes);
       MPI_Send(buffer, nBytes, MPI_CHAR, rank - s, 0, MPI_COMM_WORLD);
       free(buffer);
     }

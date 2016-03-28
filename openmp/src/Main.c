@@ -88,11 +88,11 @@ int main(int argc, char** argv) {
       // TODO: We could possibly parallelize this transformation and sort.
       MapElement* elements = map2Array(maps[0]);
       sortArray(elements, maps[0]->nElements);
-      //printf("Top 10 words:\n");
-      //int i;
-      //for(i = 0; i < 10; i++) {
-      //printf("%d\t%s\t%d\n", i, (char*)elements[i].k, elements[i].v);
-      //}
+      printf("Top 10 words:\n");
+      int i;
+      for(i = 0; i < 10; i++) {
+	printf("%d\t%s\t%d\n", i, (char*)elements[i].k, elements[i].v);
+      }
   
       deleteMapArray(elements, maps[0]->nElements);
       //printf("There are %d unique words.\n", maps[0]->nElements);

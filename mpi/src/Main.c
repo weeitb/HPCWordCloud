@@ -25,6 +25,7 @@ int main(int argc, char** argv) {
   start = MPI_Wtime();
   MPI_Comm_size(MPI_COMM_WORLD, &numprocs);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  //printf("got to start\n");
   DIR* dp;
   dp = opendir(READ_DIR_PATH);
   struct dirent* ep;
@@ -35,18 +36,20 @@ int main(int argc, char** argv) {
   if (dp != NULL) {
     while (ep = readdir(dp)) {
       // equally divide files among processes.
-      if (i % numprocs - rank == 0) {
-	filepath = (char*) malloc(1 + strlen(ep->d_name) + strlen(argv[1]));
-	strcpy(filepath, argv[1]);
+      if ((i % numprocs) - rank == 0) {
+	filepath = (char*) malloc(1 + strlen(ep->d_name) + strlen(READ_DIR_PATH));
+	strcpy(filepath, READ_DIR_PATH);
 	strcat(filepath, ep->d_name);
 	push(stack, filepath);
       }
       i++;
     }
   } else {
+    printf("Couldn't open input directory\n");
     return 0;
   }
   closedir(dp);
+  //printf("got past dividing work\n");
   HashMap* map = newMap(2000, &stringHasher, &stringComparator, &stringCopy);
 
   char* filename;
@@ -58,6 +61,7 @@ int main(int argc, char** argv) {
     free(filename);
     filename = pop(stack);
   }
+  //printf("got past reading\n");
   stop_read = MPI_Wtime();
   mapReduce(map, rank, numprocs);
   stop_reduce = MPI_Wtime();

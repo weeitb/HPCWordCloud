@@ -56,6 +56,11 @@ void push(FilenameStack* stack, char* filename);
  */
 char* pop(FilenameStack* stack);
 
+union SerializedData {
+  uint32_t* intPtr;
+  char* strPtr;
+};
+
 /**
  * Converts a hashmap into a contigious block of memory for
  * sending.
@@ -63,7 +68,7 @@ char* pop(FilenameStack* stack);
  * @param nBytes serialized block size.
  * @return pointer to serialized block of data
  */
-char* serializeMap(HashMap* map, uint32_t* nBytes);
+unsigned char* serializeMap(HashMap* map, uint32_t* nBytes);
 
 /**
  * Takes in a linked list of map nodes and serliazes them to
@@ -72,7 +77,7 @@ char* serializeMap(HashMap* map, uint32_t* nBytes);
  * @param  bucket start pointer of linked list of map elements.
  * @return updated pointer of data incremented past data serialized.
  */
-inline char* serializeBuckets(char* data, MapNode* bucket);
+inline unsigned char* serializeBuckets(unsigned char* data, MapNode* bucket);
 
 /**
  * Reads out one bucket of information from data pointer.
@@ -81,7 +86,7 @@ inline char* serializeBuckets(char* data, MapNode* bucket);
  * in data chunk.
  * @return updated data pointer position after reading bucket.
  */
-inline char* unserializeBucket(Value* v, Key* k, char* data);
+inline unsigned char* unserializeBucket(Value* v, Key* k, unsigned char* data);
 
 /**
  * unpacks a block of serialized data and adds it to input
@@ -89,7 +94,7 @@ inline char* unserializeBucket(Value* v, Key* k, char* data);
  * @param map map to add serialized key value pairs to
  * @param data serialized key value pairs to parse
  */
-void addSerializedToMap(HashMap* map, char* data);
+void addSerializedToMap(HashMap* map, unsigned char* data, int nBytes);
 
 /**
  * Increments the value for specified key by 1. If no
@@ -100,5 +105,15 @@ void addSerializedToMap(HashMap* map, char* data);
  * @param 1 if added. 0 if merged with existing.
  */
 unsigned int addToBucket(HashMap* map, Key k, Value v, unsigned int hash);
+
+/**
+ * Performs map reduce using mpi message passing.
+ * Assumes numprocs is a power of 2. The result will
+ * be stored in the map on process with rank 0.
+ * @param map local map to reduce
+ * @param rank mpi process rank
+ * @param numprocs number of mpi processes.
+ */
+void mapReduce(HashMap* map, int rank, int numprocs);
 
 #endif /* MPI_UTIL__H */

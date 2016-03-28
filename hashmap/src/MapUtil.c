@@ -23,10 +23,10 @@ MapElement* map2Array(const HashMap* map) {
   for (i = 0; i < map->nBuckets; i++) {
     node = map->buckets[i];
     while(node != NULL) {
-      if (j > map->nElements) {
-	printf("we had an oopsie\n");
-	return;
-      }
+      //if (j > map->nElements) {
+      //printf("we had an oopsie\n");
+      //return;
+      //}
       elements[j].v = node->v;
       elements[j].k = (*map->keyCopy)(node->k, &keyLen);
       j++;
@@ -79,7 +79,7 @@ void deleteMapArray(MapElement* elements, uint32_t nElements) {
 Hash stringHasher(const Key k) {
   Hash hash = 5381;
   int c;
-  char* str = k;
+  char* str = (char*) k;
   while (c = *str++) {
     hash = ((hash << 5) + hash) + c;
   }
@@ -95,7 +95,7 @@ Hash stringHasher(const Key k) {
 Hash badStringHasher(const Key k) {
   Hash hash = 0;
   int c;
-  char* str = k;
+  char* str = (char*) k;
   while (c = *str++) {
     hash += c;
   }
@@ -118,8 +118,8 @@ int32_t stringComparator(const Key kA, const Key kB) {
  * @return pointer to new copy (casted as void*)
  */
 Key stringCopy(const Key strK, int* keyLen) {
-  *keyLen = strlen((char*) strK);
-  char* newCopy = malloc(sizeof(char) * (*keyLen));
+  *keyLen = strlen((char*) strK) + 1;
+  char* newCopy = (char*) malloc(sizeof(char) * (*keyLen));
   strcpy(newCopy, (char*) strK);
   return (Key) newCopy;
 }
