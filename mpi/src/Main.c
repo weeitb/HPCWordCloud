@@ -70,10 +70,10 @@ int main(int argc, char** argv) {
   if (rank == 0) {
     MapElement* elements = map2Array(map);
     sortArray(elements, map->nElements);
-    printf("Top 10 words:\n");
-    for(i = 0; i < 10; i++) {
-      printf("%d\t%s\t%d\n", i, (char*)elements[i].k, elements[i].v);
-    }
+    //printf("Top 10 words:\n");
+    //for(i = 0; i < 10; i++) {
+    //printf("%d\t%s\t%d\n", i, (char*)elements[i].k, elements[i].v);
+    //}
   
     deleteMapArray(elements, map->nElements);
     //printf("There are %d unique words.\n", maps[0]->nElements);
