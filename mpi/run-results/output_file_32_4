@@ -1,0 +1,1300 @@
+Sender: LSF System <lsfadmin@compute-0-068>
+Subject: Job 614235: <word_cloud_mpi> in cluster <mghpcc_cluster1> Done
+
+Job <word_cloud_mpi> was submitted from host <discovery2> by user <bertorelli.w> in cluster <mghpcc_cluster1>.
+Job was executed on host(s) <4*compute-0-068>, in queue <ser-par-10g-2>, as user <bertorelli.w> in cluster <mghpcc_cluster1>.
+                            <4*compute-0-070>
+                            <4*compute-0-077>
+                            <4*compute-0-078>
+                            <4*compute-0-079>
+                            <4*compute-0-082>
+                            <4*compute-0-090>
+                            <4*compute-0-094>
+</home/bertorelli.w> was used as the home directory.
+</home/bertorelli.w/project/project/mpi> was used as the working directory.
+Started at Mon Mar 28 22:31:05 2016
+Results reported at Mon Mar 28 22:33:21 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -J word_cloud_mpi
+#BSUB -o output_file
+#BSUB -e error_file
+#BSUB -n 32
+#BSUB -R "span[ptile=4]"
+#BSUB -q ser-par-10g-2
+#BSUB cwd /home/bertorelli.w/project/project/mpi
+work=/home/bertorelli.w/project/project/mpi
+cd $work
+tempfile1=hostlistrun
+tempfile2=hostlist-tcp
+echo $LSB_MCPU_HOSTS > $tempfile1
+declare -a hosts
+read -a hosts < ${tempfile1}
+for ((i=0; i<${#hosts[@]}; i+=2)) ;
+  do
+    HOST=${hosts[$i]}
+    CORE=${hosts[(($i+1))]}
+    echo $HOST:$CORE >> $tempfile2
+done
+
+mpirun -np 32 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 32 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 32 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 32 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 32 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 32 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 32 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 32 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 32 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 32 -prot -TCP -lsf ./mpi
+
+mpirun -np 32 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 32 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 32 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 32 -prot -TCP -lsf ./mpi
+sleep 1
+
+(... more ...)
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :               730.00 sec.
+    Max Memory :             49 MB
+    Average Memory :         24.00 MB
+    Total Requested Memory : -
+    Delta Memory :           -
+    (Delta: the difference between total requested memory and actual max usage.)
+    Max Swap :               652 MB
+
+    Max Processes :          13
+    Max Threads :            14
+
+The output (if any) follows:
+
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+8.96037e-01,9.01561e-02,9.97700e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.03967e-01,1.71623e-01,2.85591e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+7.38080e-02,6.18410e-02,1.51157e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.06553e-01,2.45440e-02,1.42592e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+8.94659e-02,5.60281e-02,1.60166e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+8.49650e-02,4.05371e-02,1.36454e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+6.64952e-02,6.07288e-02,1.42736e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+7.44069e-02,2.29450e-01,3.15498e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+7.02591e-02,2.32289e-02,1.05022e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+7.94051e-02,1.22697e-01,2.13662e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+5.24960e-02,2.96254e-01,3.58680e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.27051e-01,1.83158e-02,1.55324e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+7.37340e-02,2.43835e-01,3.28587e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+6.40810e-02,1.16201e-01,1.90568e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+9.59702e-02,2.82018e-02,1.36468e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+6.82199e-02,2.59474e-01,3.37852e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+7.67169e-02,1.00673e-01,1.94422e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+5.48491e-02,1.78680e-01,2.45974e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+6.15749e-02,1.78414e-01,2.51969e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+6.65958e-02,8.68421e-02,1.65165e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+8.56621e-02,1.40380e-01,2.38354e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+7.32100e-02,8.33931e-02,1.68203e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+8.22852e-02,9.32629e-02,1.85524e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+8.75299e-02,6.38380e-02,1.61106e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+5.88410e-02,2.87079e-01,3.57452e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.08390e-01,6.51970e-02,1.83727e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+9.86619e-02,4.95150e-02,1.60020e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+8.30431e-02,4.98168e-02,1.43905e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+8.86421e-02,1.03190e-01,2.02328e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+9.47061e-02,4.24960e-02,1.54350e-01
+Mar 28 22:32:29 2016 15977 3 9.1.1 lsb_launch(): Failed while waiting for tasks to finish.
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.16780e-01,2.28021e-01,3.56451e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.02885e-01,8.30641e-02,1.97780e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+7.35450e-02,8.95941e-02,1.74763e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+9.94420e-02,2.87111e-02,1.45369e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+8.30271e-02,3.40779e-02,1.28553e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+9.68380e-02,9.00331e-02,1.98532e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+5.70951e-02,1.10381e-01,1.79095e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+8.68709e-02,7.77061e-02,1.74530e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+8.12910e-02,1.63674e-01,2.56503e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+5.21848e-02,1.46425e-01,2.09635e-01
+Mar 28 22:32:48 2016 16174 3 9.1.1 lsb_launch(): Failed while waiting for tasks to finish.
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+5.13170e-02,1.77847e-01,2.40738e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+5.15990e-02,4.76282e-02,1.08318e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+6.58300e-02,3.31605e-01,4.07413e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+7.47259e-02,7.20971e-02,1.57258e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+9.33850e-02,9.06892e-02,1.95043e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+5.82941e-02,5.73049e-02,1.26602e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+7.01580e-02,4.36819e-02,1.23769e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.26121e-01,2.71540e-02,1.70360e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+7.76021e-02,2.80791e-01,3.69899e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.238 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.245 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.246 -- ranks 12 - 15
+Host 4 -- ip 10.100.8.247 -- ranks 16 - 19
+Host 5 -- ip 10.100.8.250 -- ranks 20 - 23
+Host 6 -- ip 10.100.9.24 -- ranks 24 - 27
+Host 7 -- ip 10.100.9.28 -- ranks 28 - 31
+
+ host | 0    1    2    3    4    5    6    7
+======|=========================================
+    0 : SHM  TCP  TCP  TCP  TCP  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP  TCP  TCP  TCP  TCP
+    2 : TCP  TCP  SHM  TCP  TCP  TCP  TCP  TCP
+    3 : TCP  TCP  TCP  SHM  TCP  TCP  TCP  TCP
+    4 : TCP  TCP  TCP  TCP  SHM  TCP  TCP  TCP
+    5 : TCP  TCP  TCP  TCP  TCP  SHM  TCP  TCP
+    6 : TCP  TCP  TCP  TCP  TCP  TCP  SHM  TCP
+    7 : TCP  TCP  TCP  TCP  TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+9.89950e-02,6.17170e-02,1.72320e-01
+
+
+PS:
+
+Read file <error_file> for stderr output of this job.
+

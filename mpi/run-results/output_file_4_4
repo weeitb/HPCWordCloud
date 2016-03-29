@@ -1,0 +1,541 @@
+Sender: LSF System <lsfadmin@compute-0-068>
+Subject: Job 614243: <word_cloud_mpi> in cluster <mghpcc_cluster1> Done
+
+Job <word_cloud_mpi> was submitted from host <discovery2> by user <bertorelli.w> in cluster <mghpcc_cluster1>.
+Job was executed on host(s) <4*compute-0-068>, in queue <ser-par-10g-2>, as user <bertorelli.w> in cluster <mghpcc_cluster1>.
+</home/bertorelli.w> was used as the home directory.
+</home/bertorelli.w/project/project/mpi> was used as the working directory.
+Started at Mon Mar 28 22:43:47 2016
+Results reported at Mon Mar 28 22:45:19 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -J word_cloud_mpi
+#BSUB -o output_file
+#BSUB -e error_file
+#BSUB -n 4
+#BSUB -R "span[ptile=4]"
+#BSUB -q ser-par-10g-2
+#BSUB cwd /home/bertorelli.w/project/project/mpi
+work=/home/bertorelli.w/project/project/mpi
+cd $work
+tempfile1=hostlistrun
+tempfile2=hostlist-tcp
+echo $LSB_MCPU_HOSTS > $tempfile1
+declare -a hosts
+read -a hosts < ${tempfile1}
+for ((i=0; i<${#hosts[@]}; i+=2)) ;
+  do
+    HOST=${hosts[$i]}
+    CORE=${hosts[(($i+1))]}
+    echo $HOST:$CORE >> $tempfile2
+done
+
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+
+(... more ...)
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :               107.27 sec.
+    Max Memory :             14 MB
+    Average Memory :         7.29 MB
+    Total Requested Memory : -
+    Delta Memory :           -
+    (Delta: the difference between total requested memory and actual max usage.)
+    Max Swap :               325 MB
+
+    Max Processes :          5
+    Max Threads :            6
+
+The output (if any) follows:
+
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+1.09907e+00,1.69289e-02,1.12735e+00
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.79736e-01,2.44329e-02,6.21192e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.71788e-01,1.04771e-02,5.93597e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.26111e-01,5.81269e-02,5.99199e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+6.07467e-01,4.24900e-02,6.58825e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.58863e-01,6.14841e-02,6.31706e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+6.92159e-01,5.20649e-02,7.55572e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+8.19078e-01,3.38399e-02,8.64966e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.75723e-01,9.11093e-03,5.95076e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.67472e-01,4.92539e-02,6.31460e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.09812e-01,5.45430e-02,5.81450e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.56452e-01,1.71790e-02,5.84929e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.02130e-01,5.14240e-02,5.93119e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.79783e-01,3.26920e-02,6.22541e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.44720e-01,4.25661e-02,5.98583e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.29633e-01,4.20969e-02,5.86966e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.42065e-01,4.65760e-02,6.27666e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.85836e-01,4.90000e-02,6.47249e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+4.92388e-01,5.00739e-02,5.51808e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+6.30964e-01,9.19914e-03,6.50472e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+6.19280e-01,1.67842e-02,6.54478e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+6.00082e-01,4.23710e-02,6.57003e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.62068e-01,4.47052e-02,6.22101e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.57017e-01,2.04611e-02,5.86420e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.82722e-01,1.07670e-02,6.05432e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.38967e-01,1.07241e-02,5.59486e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.61455e-01,4.67141e-02,6.21872e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.42042e-01,4.15831e-02,6.16119e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.76581e-01,3.62182e-02,6.30342e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.06509e-01,5.50852e-02,5.79303e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.71490e-01,3.79019e-02,6.27012e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.27202e-01,4.40040e-02,6.09350e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.50669e-01,3.58691e-02,6.01365e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+6.53827e-01,3.97351e-02,7.04923e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.24660e-01,6.63612e-02,6.01728e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.23197e-01,3.58200e-02,5.69224e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+6.26442e-01,3.10609e-02,6.66907e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.26521e-01,4.36461e-02,5.84945e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.54241e-01,3.27981e-02,5.98368e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.76650e-01,8.88422e-02,6.82199e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.60864e-01,5.84278e-02,6.35986e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.76169e-01,3.08881e-02,6.17127e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.29604e-01,4.66070e-02,5.86965e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.39700e-01,3.75900e-02,5.87829e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+6.25355e-01,1.02248e-02,6.46912e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.73953e-01,1.34020e-02,5.99600e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.37453e-01,3.18630e-02,5.78494e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.43970e-01,4.16598e-02,5.94688e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+6.28416e-01,1.11439e-02,6.52222e-01
+Host 0 -- ip 10.100.8.236 -- ranks 0 - 3
+
+ host | 0
+======|======
+    0 : SHM
+
+ Prot -  All Intra-node communication is: SHM
+
+5.59025e-01,3.52368e-02,6.05584e-01
+
+
+PS:
+
+Read file <error_file> for stderr output of this job.
+

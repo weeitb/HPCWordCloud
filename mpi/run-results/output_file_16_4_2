@@ -1,0 +1,245 @@
+Sender: LSF System <lsfadmin@compute-0-005>
+Subject: Job 614227: <word_cloud_mpi> in cluster <mghpcc_cluster1> Done
+
+Job <word_cloud_mpi> was submitted from host <discovery2> by user <bertorelli.w> in cluster <mghpcc_cluster1>.
+Job was executed on host(s) <4*compute-0-005>, in queue <ht-10g>, as user <bertorelli.w> in cluster <mghpcc_cluster1>.
+                            <4*compute-0-006>
+                            <4*compute-0-004>
+                            <4*compute-0-007>
+</home/bertorelli.w> was used as the home directory.
+</home/bertorelli.w/project/project/mpi> was used as the working directory.
+Started at Mon Mar 28 22:21:29 2016
+Results reported at Mon Mar 28 22:21:45 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -J word_cloud_mpi
+#BSUB -o output_file
+#BSUB -e error_file
+#BSUB -n 16
+#BSUB -R "span[ptile=4]"
+#BSUB -q ht-10g
+#BSUB cwd /home/bertorelli.w/project/project/mpi
+work=/home/bertorelli.w/project/project/mpi
+cd $work
+tempfile1=hostlistrun
+tempfile2=hostlist-tcp
+echo $LSB_MCPU_HOSTS > $tempfile1
+declare -a hosts
+read -a hosts < ${tempfile1}
+for ((i=0; i<${#hosts[@]}; i+=2)) ;
+  do
+    HOST=${hosts[$i]}
+    CORE=${hosts[(($i+1))]}
+    echo $HOST:$CORE >> $tempfile2
+done
+
+mpirun -np 16 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 16 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 16 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 16 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 16 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 16 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 16 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 16 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 16 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 16 -prot -TCP -lsf ./mpi
+
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :               55.06 sec.
+    Max Memory :             14 MB
+    Average Memory :         14.00 MB
+    Total Requested Memory : -
+    Delta Memory :           -
+    (Delta: the difference between total requested memory and actual max usage.)
+    Max Swap :               59 MB
+
+    Max Processes :          1
+    Max Threads :            1
+
+The output (if any) follows:
+
+Host 0 -- ip 10.100.8.45 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.46 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.44 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.47 -- ranks 12 - 15
+
+ host | 0    1    2    3
+======|=====================
+    0 : SHM  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP
+    2 : TCP  TCP  SHM  TCP
+    3 : TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+2.89771e-01,3.83899e-02,3.46841e-01
+Host 0 -- ip 10.100.8.45 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.46 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.44 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.47 -- ranks 12 - 15
+
+ host | 0    1    2    3
+======|=====================
+    0 : SHM  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP
+    2 : TCP  TCP  SHM  TCP
+    3 : TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.73387e-01,3.79100e-02,2.29888e-01
+Host 0 -- ip 10.100.8.45 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.46 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.44 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.47 -- ranks 12 - 15
+
+ host | 0    1    2    3
+======|=====================
+    0 : SHM  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP
+    2 : TCP  TCP  SHM  TCP
+    3 : TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.65327e-01,4.37689e-02,2.27753e-01
+Host 0 -- ip 10.100.8.45 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.46 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.44 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.47 -- ranks 12 - 15
+
+ host | 0    1    2    3
+======|=====================
+    0 : SHM  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP
+    2 : TCP  TCP  SHM  TCP
+    3 : TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.57476e-01,5.00031e-02,2.26202e-01
+Host 0 -- ip 10.100.8.45 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.46 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.44 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.47 -- ranks 12 - 15
+
+ host | 0    1    2    3
+======|=====================
+    0 : SHM  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP
+    2 : TCP  TCP  SHM  TCP
+    3 : TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.56904e-01,4.29640e-02,2.18709e-01
+Host 0 -- ip 10.100.8.45 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.46 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.44 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.47 -- ranks 12 - 15
+
+ host | 0    1    2    3
+======|=====================
+    0 : SHM  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP
+    2 : TCP  TCP  SHM  TCP
+    3 : TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+2.02957e-01,6.99599e-02,3.01844e-01
+Host 0 -- ip 10.100.8.45 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.46 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.44 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.47 -- ranks 12 - 15
+
+ host | 0    1    2    3
+======|=====================
+    0 : SHM  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP
+    2 : TCP  TCP  SHM  TCP
+    3 : TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.92689e-01,6.65119e-02,2.77904e-01
+Host 0 -- ip 10.100.8.45 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.46 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.44 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.47 -- ranks 12 - 15
+
+ host | 0    1    2    3
+======|=====================
+    0 : SHM  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP
+    2 : TCP  TCP  SHM  TCP
+    3 : TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.73760e-01,6.57260e-02,2.58170e-01
+Host 0 -- ip 10.100.8.45 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.46 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.44 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.47 -- ranks 12 - 15
+
+ host | 0    1    2    3
+======|=====================
+    0 : SHM  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP
+    2 : TCP  TCP  SHM  TCP
+    3 : TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+1.60706e-01,4.08170e-02,2.20185e-01
+Host 0 -- ip 10.100.8.45 -- ranks 0 - 3
+Host 1 -- ip 10.100.8.46 -- ranks 4 - 7
+Host 2 -- ip 10.100.8.44 -- ranks 8 - 11
+Host 3 -- ip 10.100.8.47 -- ranks 12 - 15
+
+ host | 0    1    2    3
+======|=====================
+    0 : SHM  TCP  TCP  TCP
+    1 : TCP  SHM  TCP  TCP
+    2 : TCP  TCP  SHM  TCP
+    3 : TCP  TCP  TCP  SHM
+
+ Prot -  All Intra-node communication is: SHM
+ Prot -  All Inter-node communication is: TCP
+
+2.06697e-01,2.91340e-02,2.54491e-01
+
+
+PS:
+
+Read file <error_file> for stderr output of this job.
+
