@@ -114,6 +114,6 @@ unsigned int addToBucket(HashMap* map, Key k, Value v, unsigned int hash);
  * @param rank mpi process rank
  * @param numprocs number of mpi processes.
  */
-void mapReduce(HashMap* map, int rank, int numprocs);
+void mpiMapReduce(HashMap* map, int rank, int numprocs);
 
 #endif /* MPI_UTIL__H */

@@ -56,11 +56,12 @@ void push(FilenameStack* stack, char* filename);
  * Pop the first filename string off of the stack.
  * Ownership of the allocated memory for the filename
  * is given to the process that pops the element off 
- * the stack.
+ * the stack. Uses openmp pragmas to prevent corruption
+ * of internal data structure
  * @param stack to pop off of.
  * @return filename string. Null if stack empty.
  */
-char* pop(FilenameStack* stack);
+char* OpenMPSafePop(FilenameStack* stack);
 
 /**
  * Aggregates the results of each hashmap into the map at index 0.
@@ -70,7 +71,7 @@ char* pop(FilenameStack* stack);
  * @param threadId the thread number of the calling thread
  * @param nThreads the number of threads executing reduction
  */
-void mapReduce(HashMap** map, unsigned int threadId, unsigned int nThreads);
+void OpenMpMapReduce(HashMap** map, unsigned int threadId, unsigned int nThreads);
 
 /**
  * Adds the two hashmaps together at the given bucket index.

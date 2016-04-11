@@ -52,7 +52,7 @@ void push(FilenameStack* stack, char* filename) {
  * @param stack to pop off of.
  * @return filename string. Null if stack empty.
  */
-char* pop(FilenameStack* stack) {
+char* OpenMPPop(FilenameStack* stack) {
   if (stack->front != NULL) {
     FilenameElement* element;
     #pragma omp critical
@@ -77,7 +77,7 @@ char* pop(FilenameStack* stack) {
  * @param threadId the thread number of the calling thread
  * @param nThreads the number of threads executing reduction
  */
-void mapReduce(HashMap** map, unsigned int threadId, unsigned int nThreads) {
+void OpenMPMapReduce(HashMap** map, unsigned int threadId, unsigned int nThreads) {
   int nBuckets = map[0]->nBuckets;
   unsigned int startIdx = (threadId * nBuckets) / nThreads;
   unsigned int endIdx;

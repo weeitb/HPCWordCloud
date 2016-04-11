@@ -71,13 +71,13 @@ int main(int argc, char** argv) {
   HashMap** maps = (HashMap**) malloc(sizeof(HashMap*) * 2);
   maps[0] = map;
   maps[1] = map2;
-  mapReduce(maps, 0, 2);
+  OpenMPMapReduce(maps, 0, 2);
   printf("key + key4 = \%d\n", get(map, testKeyPtr));
   printf("key6 = \%d\n", get(map, testKeyPtr6));
   printf("key5 = \%d\n", get(map, testKeyPtr5));
   printf("key3 = \%d\n", get(map, testKeyPtr3));
   printf("key7 = \%d\n", get(map, testKeyPtr7));
-  mapReduce(maps, 1, 2);
+  OpenMPMapReduce(maps, 1, 2);
   printf("key + key4 = \%d\n", get(map, testKeyPtr));
   printf("key6 = \%d\n", get(map, testKeyPtr6));
   printf("key5 = \%d\n", get(map, testKeyPtr5));
