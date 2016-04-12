@@ -5,8 +5,8 @@
 #BSUB -n 8
 #BSUB -R "span[ptile=4]"
 #BSUB -q ht-10g
-#BSUB cwd /home/bertorelli.w/project/project/mpi
-work=/home/bertorelli.w/project/project/mpi
+#BSUB cwd /home/bertorelli.w/project/HPCWordCloud/mpi
+work=/home/bertorelli.w/project/HPCWordCloud/mpi
 cd $work
 tempfile1=hostlistrun
 tempfile2=hostlist-tcp

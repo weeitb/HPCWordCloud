@@ -37,14 +37,6 @@ inline unsigned char* serializeBuckets(unsigned char* data, MapNode* bucket);
 inline unsigned char* unserializeBucket(Value* v, Key* k, unsigned char* data);
 
 /**
- * unpacks a block of serialized data and adds it to input
- * hashmap
- * @param map map to add serialized key value pairs to
- * @param data serialized key value pairs to parse
- */
-void addSerializedToMap(HashMap* map, unsigned char* data, int nBytes);
-
-/**
  * Increments the value for specified key by 1. If no
  * key-value pair exists, one will be created with value 1.
  * @param map pointer to map to put pair

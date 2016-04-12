@@ -11,6 +11,7 @@
 #include "MapUtil.h"
 #include "FileParser.h"
 #include "OpenMPUtil.h"
+#include "stack.h"
 
 int main(int argc, char** argv) {
   double start, stop;
@@ -54,7 +55,7 @@ int main(int argc, char** argv) {
     // Wait for thread 1 to finish allocating space for all maps.
     #pragma omp barrier
     // Each thread creates it's own map.
-    if (strcmp(argv[2], "bad")) {
+    if (strcmp(argv[2], "bad") == 0) {
       maps[tid] = newMap(atoi(argv[3]), &badStringHasher, &stringComparator, &stringCopy);
     } else {
       maps[tid] = newMap(atoi(argv[3]), &stringHasher, &stringComparator, &stringCopy);
@@ -62,20 +63,20 @@ int main(int argc, char** argv) {
     // only one thread can access the stack at a time to prevent multiple stacks
     // from accidentally reading the same file.
     char* filename;
-    filename = pop(stack);
+    filename = OpenMPPop(stack);
     while(filename != NULL) {
       // most of the time spent should be here, so collisions should in theory
       // not cause a large performance impact.
       readFile(filename, 0, maps[tid]);
       free(filename);
-      filename = pop(stack);
+      filename = OpenMPPop(stack);
     }
     // wait until all threads get here to map reduce
     #pragma omp barrier
     if (tid == 0) {
       stop_read = omp_get_wtime();
     }
-    mapReduce(maps, tid, nThreads);
+    OpenMPMapReduce(maps, tid, nThreads);
     #pragma omp barrier
     if (tid == 0) {
       stop_reduce = omp_get_wtime();

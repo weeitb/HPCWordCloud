@@ -70,4 +70,14 @@ int32_t stringComparator(const Key strKA, const Key strKB);
  */
 Key stringCopy(const Key strK, int* strLen);
 
+/**
+ * Increments the value for specified key by 1. If no
+ * key-value pair exists, one will be created with value 1.
+ * @param map pointer to map to put pair
+ * @param k Key of value to increment. 
+ * @param v Value to increment by.
+ * @return 1 if value added, 0 if merged with an existing.
+ */
+unsigned int addToBucket(HashMap* map, Key k, Value v, unsigned int hash);
+
 #endif /* MAP_UTIL__H */

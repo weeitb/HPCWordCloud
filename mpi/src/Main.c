@@ -11,6 +11,7 @@
 #include "MapUtil.h"
 #include "FileParser.h"
 #include "mpiUtil.h"
+#include "stack.h"
 
 // our input arguments are being redirected to
 // mpi. Define directory to read.

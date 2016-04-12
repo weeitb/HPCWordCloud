@@ -1,4 +1,5 @@
 #include "stack.h"
+#include "stdlib.h"
 
 /**
  * Create a new empty stack
