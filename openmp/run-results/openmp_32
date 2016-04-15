@@ -1,0 +1,166 @@
+Sender: LSF System <lsfadmin@compute-0-050>
+Subject: Job 642672: <bertore_WordCountOMP> in cluster <mghpcc_cluster1> Done
+
+Job <bertore_WordCountOMP> was submitted from host <discovery2> by user <bertorelli.w> in cluster <mghpcc_cluster1>.
+Job was executed on host(s) <compute-0-050>, in queue <ser-par-10g>, as user <bertorelli.w> in cluster <mghpcc_cluster1>.
+</home/bertorelli.w> was used as the home directory.
+</home/bertorelli.w/project/HPCWordCloud/openmp> was used as the working directory.
+Started at Thu Apr 14 17:24:33 2016
+Results reported at Thu Apr 14 17:25:43 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -J  bertore_WordCountOMP
+#BSUB -o output_log
+#BSUB -e error_log
+#BSUB -n 1
+#BSUB -q ser-par-10g
+#BSUB cwd /home/bertorelli.w/project/HPCWordCloud/openmp
+work=/home/bertorelli.w/project/HPCWordCloud/openmp
+cd $work
+
+export OMP_NUM_THREADS=32
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+./openmp ../resources/bibleChapters/ good 2000
+sleep 1
+
+(... more ...)
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :               276.03 sec.
+    Max Memory :             13 MB
+    Average Memory :         7.00 MB
+    Total Requested Memory : -
+    Delta Memory :           -
+    (Delta: the difference between total requested memory and actual max usage.)
+    Max Swap :               325 MB
+
+    Max Processes :          4
+    Max Threads :            5
+
+The output (if any) follows:
+
+2.36444e+00
+2.55443e-02
+2.41279e+00
+1.60712e+00
+2.90192e-02
+1.66466e+00
+1.56246e+00
+2.14056e-02
+1.60616e+00
+1.75547e+00
+2.68916e-02
+1.80497e+00
+1.66647e+00
+2.74287e-02
+1.71622e+00
+1.77092e+00
+2.48144e-02
+1.82191e+00
+1.65041e+00
+2.02843e-02
+1.69317e+00
+1.73103e+00
+2.14714e-02
+1.77718e+00
+1.66289e+00
+1.82934e-02
+1.70371e+00
+1.58090e+00
+2.88407e-02
+1.63263e+00
+1.68763e+00
+1.78721e-02
+1.72793e+00
+1.73581e+00
+2.81764e-02
+1.78719e+00
+1.81766e+00
+3.06452e-02
+1.87088e+00
+1.75105e+00
+1.51260e-02
+1.78893e+00
+1.63337e+00
+2.36564e-02
+1.67954e+00
+1.70680e+00
+2.29069e-02
+1.75227e+00
+1.63613e+00
+1.88854e-02
+1.66732e+00
+1.58476e+00
+1.94938e-02
+1.62670e+00
+1.57696e+00
+2.66426e-02
+1.62613e+00
+1.70695e+00
+1.78153e-02
+1.75070e+00
+1.76103e+00
+2.44385e-02
+1.80814e+00
+1.68271e+00
+2.06668e-02
+1.73033e+00
+1.89304e+00
+2.22720e-02
+1.93335e+00
+1.70388e+00
+2.18667e-02
+1.76117e+00
+1.70139e+00
+2.36001e-02
+1.75203e+00
+
+
+PS:
+
+Read file <error_log> for stderr output of this job.
+

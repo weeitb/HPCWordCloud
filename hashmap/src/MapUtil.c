@@ -123,3 +123,44 @@ Key stringCopy(const Key strK, int* keyLen) {
   strcpy(newCopy, (char*) strK);
   return (Key) newCopy;
 }
+
+/**
+ * Increments the value for specified key by 1. If no
+ * key-value pair exists, one will be created with value 1.
+ * @param map pointer to map to put pair
+ * @param k Key of value to increment. 
+ * @param v Value to increment by.
+ * @param 1 if added. 0 if merged with existing.
+ */
+unsigned int addToBucket(HashMap* map, Key k, Value v, unsigned int hash) {
+  MapNode* node = map->buckets[hash];
+  // check if our bucket is empty. If it is We need to point
+  // it to it's first element when it's created later.
+  char bucketIsEmpty = node == NULL;
+  MapNode* prevNode = node;
+  while(node != NULL) {
+    if (map->comparator(k, node->k) == 0) {
+      node->v += v;
+      return 0;
+    }
+    prevNode = node;
+    node = node->nextNode;
+  }
+  
+  node = (MapNode*) malloc(sizeof(MapNode));
+
+  // Add it as the first element in bucket
+  if (bucketIsEmpty) { 
+    map->buckets[hash] = node;
+  }
+  node->nextNode = NULL;
+  node->v = v;
+  // Copy the key so we have our own local copy.
+  int strLen;
+  node->k = (*map->keyCopy)(k, &strLen);
+  map->nBytes += sizeof(Value) + sizeof(char) * (strLen + 1);
+  if (prevNode != NULL) {
+    prevNode->nextNode = node;
+  }
+  return 1;
+}

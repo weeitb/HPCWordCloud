@@ -24,12 +24,15 @@ unsigned char* serializeMap(HashMap* map, uint32_t* nBytes) {
   *data++ = (map->nElements >> 16) & 0xff;
   *data++ = (map->nElements >> 24) & 0xff;
   MapNode* currentBucket;
+  //printf("nElements: %d, nBuckets: %d\n", map->nElements, map->nBuckets);
   for (bucketIdx = 0; bucketIdx < map->nBuckets; bucketIdx++) {
     currentBucket = map->buckets[bucketIdx];
     data = serializeBuckets(data, currentBucket);
+    //printf("got to bucketIdx %d\n", bucketIdx);
   }
+  //printf("end of serialization function\n");
   if (data - startData + 1 > *nBytes) {
-    printf("We aren't bookeeping properly %d, %d\n", data - startData + 1, nBytes);
+    printf("We aren't bookeeping properly %d, %d\n", data - startData + 1, *nBytes);
   }
   return startData;
 }
@@ -106,47 +109,6 @@ void addSerializedToMap(HashMap* map, unsigned char* data, int nBytes) {
   }
 }
 
-/**
- * Increments the value for specified key by 1. If no
- * key-value pair exists, one will be created with value 1.
- * @param map pointer to map to put pair
- * @param k Key of value to increment. 
- * @param v Value to increment by.
- * @param 1 if added. 0 if merged with existing.
- */
-unsigned int addToBucket(HashMap* map, Key k, Value v, unsigned int hash) {
-  MapNode* node = map->buckets[hash];
-  // check if our bucket is empty. If it is We need to point
-  // it to it's first element when it's created later.
-  char bucketIsEmpty = node == NULL;
-  MapNode* prevNode = node;
-  while(node != NULL) {
-    if (map->comparator(k, node->k) == 0) {
-      node->v += v;
-      return 0;
-    }
-    prevNode = node;
-    node = node->nextNode;
-  }
-  
-  node = (MapNode*) malloc(sizeof(MapNode));
-
-  // Add it as the first element in bucket
-  if (bucketIsEmpty) { 
-    map->buckets[hash] = node;
-  }
-  node->nextNode = NULL;
-  node->v = v;
-  int strLen;
-  map->nBytes += sizeof(Value) + sizeof(char) * (strLen + 1);
-  // Copy the key so we have our own local copy.
-  node->k = (*map->keyCopy)(k, &strLen);
-  if (prevNode != NULL) {
-    prevNode->nextNode = node;
-  }
-  return 1;
-}
-
 
 /**
  * Performs map reduce using mpi message passing.
@@ -161,6 +123,7 @@ void mpiMapReduce(HashMap* map, int rank, int numprocs) {
   int count;
   MPI_Status status;
   char* buffer;
+  //printf("starting map reduce\n");
   for (s = numprocs / 2; s > 0; s = s/2) {
     if (rank < s) {
       // Get the number of elements being sent to us.
@@ -179,7 +142,9 @@ void mpiMapReduce(HashMap* map, int rank, int numprocs) {
     } else if (rank < 2 * s) {
       // serialize hashmap for sending.
       uint32_t nBytes;
+      //printf("sending data from %d to %d\n", rank, rank - s);
       buffer = (char*)serializeMap(map, &nBytes);
+      //printf("serialized map for sending in rank %d\n", rank);
       MPI_Send(buffer, nBytes, MPI_CHAR, rank - s, 0, MPI_COMM_WORLD);
       free(buffer);
     }

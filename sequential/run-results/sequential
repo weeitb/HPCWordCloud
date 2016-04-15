@@ -1,0 +1,140 @@
+Sender: LSF System <lsfadmin@compute-0-050>
+Subject: Job 642517: <bertore_WordCountSeq> in cluster <mghpcc_cluster1> Done
+
+Job <bertore_WordCountSeq> was submitted from host <discovery2> by user <bertorelli.w> in cluster <mghpcc_cluster1>.
+Job was executed on host(s) <10*compute-0-050>, in queue <ser-par-10g>, as user <bertorelli.w> in cluster <mghpcc_cluster1>.
+</home/bertorelli.w> was used as the home directory.
+</home/bertorelli.w/project/HPCWordCloud/sequential> was used as the working directory.
+Started at Thu Apr 14 16:14:48 2016
+Results reported at Thu Apr 14 16:24:31 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -J  bertore_WordCountSeq
+#BSUB -o output_log
+#BSUB -e error_log
+#BSUB -n 10
+#BSUB -q ser-par-10g
+#BSUB cwd /home/bertorelli.w/project/HPCWordCloud/sequential
+work=/home/bertorelli.w/project/HPCWordCloud/sequential
+cd $work
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+./sequential ../resources/bibleChapters/ good 2000
+sleep 1
+
+(... more ...)
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :               292.97 sec.
+    Max Memory :             13 MB
+    Average Memory :         5.28 MB
+    Total Requested Memory : -
+    Delta Memory :           -
+    (Delta: the difference between total requested memory and actual max usage.)
+    Max Swap :               325 MB
+
+    Max Processes :          4
+    Max Threads :            5
+
+The output (if any) follows:
+7.07000e+00
+6.04000e+00
+5.70000e+00
+5.84000e+00
+5.91000e+00
+5.77000e+00
+5.85000e+00
+5.83000e+00
+5.67000e+00
+5.85000e+00
+5.73000e+00
+5.83000e+00
+5.72000e+00
+5.83000e+00
+5.75000e+00
+5.66000e+00
+5.87000e+00
+5.71000e+00
+5.82000e+00
+5.68000e+00
+5.65000e+00
+5.70000e+00
+5.68000e+00
+5.85000e+00
+5.66000e+00
+5.86000e+00
+5.72000e+00
+5.66000e+00
+5.72000e+00
+5.71000e+00
+5.93000e+00
+5.68000e+00
+5.80000e+00
+5.55000e+00
+5.72000e+00
+5.66000e+00
+5.70000e+00
+5.87000e+00
+5.71000e+00
+5.87000e+00
+5.68000e+00
+5.69000e+00
+5.75000e+00
+5.71000e+00
+5.92000e+00
+5.71000e+00
+5.87000e+00
+5.74000e+00
+5.70000e+00
+5.72000e+00
+
+
+PS:
+
+Read file <error_log> for stderr output of this job.
+

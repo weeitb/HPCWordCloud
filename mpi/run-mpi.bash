@@ -2,11 +2,11 @@
 #BSUB -J word_cloud_mpi
 #BSUB -o output_file
 #BSUB -e error_file
-#BSUB -n 8
-#BSUB -R "span[ptile=4]"
-#BSUB -q ht-10g
-#BSUB cwd /home/bertorelli.w/project/project/mpi
-work=/home/bertorelli.w/project/project/mpi
+#BSUB -n 32
+#BSUB -R "span[ptile=2]"
+#BSUB -q ser-par-10g
+#BSUB cwd /home/bertorelli.w/project/HPCWordCloud/mpi
+work=/home/bertorelli.w/project/HPCWordCloud/mpi
 cd $work
 tempfile1=hostlistrun
 tempfile2=hostlist-tcp
@@ -20,103 +20,103 @@ for ((i=0; i<${#hosts[@]}; i+=2)) ;
     echo $HOST:$CORE >> $tempfile2
 done
 
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 sleep 1
-mpirun -np 8 -prot -TCP -lsf ./mpi
+mpirun -np 32 -prot -TCP -lsf ./mpi
 

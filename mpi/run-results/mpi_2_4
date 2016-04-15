@@ -1,0 +1,241 @@
+Sender: LSF System <lsfadmin@compute-0-052>
+Subject: Job 642551: <word_cloud_mpi> in cluster <mghpcc_cluster1> Done
+
+Job <word_cloud_mpi> was submitted from host <discovery2> by user <bertorelli.w> in cluster <mghpcc_cluster1>.
+Job was executed on host(s) <2*compute-0-052>, in queue <ser-par-10g>, as user <bertorelli.w> in cluster <mghpcc_cluster1>.
+                            <2*compute-0-053>
+</home/bertorelli.w> was used as the home directory.
+</home/bertorelli.w/project/HPCWordCloud/mpi> was used as the working directory.
+Started at Thu Apr 14 16:36:07 2016
+Results reported at Thu Apr 14 16:40:29 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -J word_cloud_mpi
+#BSUB -o output_file
+#BSUB -e error_file
+#BSUB -n 4
+#BSUB -R "span[ptile=2]"
+#BSUB -q ser-par-10g
+#BSUB cwd /home/bertorelli.w/project/HPCWordCloud/mpi
+work=/home/bertorelli.w/project/HPCWordCloud/mpi
+cd $work
+tempfile1=hostlistrun
+tempfile2=hostlist-tcp
+echo $LSB_MCPU_HOSTS > $tempfile1
+declare -a hosts
+read -a hosts < ${tempfile1}
+for ((i=0; i<${#hosts[@]}; i+=2)) ;
+  do
+    HOST=${hosts[$i]}
+    CORE=${hosts[(($i+1))]}
+    echo $HOST:$CORE >> $tempfile2
+done
+
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./mpi
+sleep 1
+
+(... more ...)
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :               525.82 sec.
+    Max Memory :             18 MB
+    Average Memory :         12.33 MB
+    Total Requested Memory : -
+    Delta Memory :           -
+    (Delta: the difference between total requested memory and actual max usage.)
+    Max Swap :               527 MB
+
+    Max Processes :          10
+    Max Threads :            11
+
+The output (if any) follows:
+1.75142e+01
+2.35190e-02
+1.75672e+01
+2.88447e+00
+9.86509e-02
+3.00703e+00
+2.75016e+00
+4.05904e-01
+3.17099e+00
+2.72496e+00
+1.01353e-01
+2.85196e+00
+2.65956e+00
+1.84770e-02
+2.70016e+00
+2.63777e+00
+1.80969e-02
+2.67808e+00
+2.61303e+00
+1.80361e-02
+2.65334e+00
+2.89444e+00
+5.21421e-02
+2.97036e+00
+2.74497e+00
+9.49721e-02
+2.85550e+00
+2.78233e+00
+2.91810e-02
+2.83706e+00
+2.61214e+00
+4.28052e-02
+2.67716e+00
+2.53443e+00
+2.35300e-01
+2.78349e+00
+2.61180e+00
+3.19791e-02
+2.66615e+00
+2.88162e+00
+1.77670e-02
+2.92171e+00
+2.62461e+00
+1.98379e-02
+2.66825e+00
+2.50085e+00
+1.43621e-02
+2.52902e+00
+2.64101e+00
+3.67107e-01
+3.03055e+00
+2.73933e+00
+2.06239e-02
+2.78412e+00
+2.62538e+00
+6.00190e-02
+2.70003e+00
+2.98150e+00
+4.68049e-02
+3.05252e+00
+3.18331e+00
+2.48104e-01
+3.45089e+00
+3.20999e+00
+4.41802e-02
+3.28400e+00
+2.65310e+00
+4.73931e-01
+3.14070e+00
+3.19043e+00
+1.03386e+00
+4.23301e+00
+3.08646e+00
+3.68953e-01
+3.47216e+00
+2.86779e+00
+2.08488e-01
+3.09702e+00
+2.90062e+00
+7.57365e-01
+3.66938e+00
+2.73423e+00
+1.87069e+00
+4.61361e+00
+2.61610e+00
+4.26151e-01
+3.05577e+00
+2.62274e+00
+4.13018e-01
+3.05677e+00
+2.53105e+00
+4.44669e-01
+2.98803e+00
+4.17351e+00
+2.18809e-02
+4.22263e+00
+2.95378e+00
+2.40127e-01
+3.21761e+00
+3.01063e+00
+3.19532e-01
+3.34956e+00
+2.91141e+00
+9.45909e-01
+3.87527e+00
+2.75730e+00
+1.30305e+00
+4.07303e+00
+2.59918e+00
+4.76497e-01
+3.08738e+00
+2.52722e+00
+5.73874e-01
+3.11410e+00
+3.86172e+00
+3.31829e-02
+3.92236e+00
+2.62344e+00
+4.77126e-01
+3.11517e+00
+2.64065e+00
+9.43316e-01
+3.59286e+00
+2.63587e+00
+6.47722e-01
+3.29669e+00
+2.73946e+00
+2.18291e+00
+4.93103e+00
+2.71682e+00
+2.91009e-01
+3.02456e+00
+2.76268e+00
+2.47862e-01
+3.03602e+00
+4.67543e+00
+7.17032e-02
+4.76656e+00
+2.98179e+00
+3.85397e-01
+3.39101e+00
+2.85470e+00
+3.78187e-01
+3.25816e+00
+2.71369e+00
+4.22530e-01
+3.15716e+00
+2.70121e+00
+2.07976e+00
+4.78945e+00
+
+
+PS:
+
+Read file <error_file> for stderr output of this job.
+

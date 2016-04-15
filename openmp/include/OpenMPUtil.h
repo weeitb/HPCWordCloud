@@ -2,55 +2,13 @@
 #define OPEN_MP_UTIL__H
 
 #include "HashMap.h"
+#include "stack.h"
+
 /**
  * Utility data structures and functions for openmp
  * implementation.
  * @author Wyatt Bertorelli <wyattbertorelli@gmail.com>
  */
-
-
-/**
- * Element for for filename stack data structure.
- */
-typedef struct FilenameElements {
-  char* filename;
-  struct FilenameElements* nextNode;
-} FilenameElement;
-
-/**
- * Stack data structure for holding list of files to parse.
- * Designed so that each thread or process can pop a file off
- * the stack to process. Mutation of this data structure must 
- * be surrounded with a critical section, so that multiple
- * threads do not end up working on the same files.
- */
-typedef struct FilenameStacks {
-  FilenameElement* front;
-  unsigned int nElements;
-} FilenameStack;
-
-
-/**
- * Create a new empty stack
- * @return pointer to new allocated stack.
- */
-FilenameStack* newStack();
-
-/**
- * Delete the input stack and all it's elements
- * @param stack stack to free from memory.
- */
-void deleteStack(FilenameStack* stack);
-
-/**
- * push a new filename string onto the stack.
- * Ownership of the filename memory is given
- * to the stack, and should only be free'd after
- * the element has been pushed off the stack.
- * @param stack stack to push onto.
- * @param filename filename to push onto stack.
- */
-void push(FilenameStack* stack, char* filename);
 
 /**
  * Pop the first filename string off of the stack.
@@ -61,7 +19,7 @@ void push(FilenameStack* stack, char* filename);
  * @param stack to pop off of.
  * @return filename string. Null if stack empty.
  */
-char* OpenMPSafePop(FilenameStack* stack);
+char* OpenMPPop(FilenameStack* stack);
 
 /**
  * Aggregates the results of each hashmap into the map at index 0.
@@ -71,7 +29,7 @@ char* OpenMPSafePop(FilenameStack* stack);
  * @param threadId the thread number of the calling thread
  * @param nThreads the number of threads executing reduction
  */
-void OpenMpMapReduce(HashMap** map, unsigned int threadId, unsigned int nThreads);
+void OpenMPMapReduce(HashMap** map, unsigned int threadId, unsigned int nThreads);
 
 /**
  * Adds the two hashmaps together at the given bucket index.
@@ -84,17 +42,5 @@ void OpenMpMapReduce(HashMap** map, unsigned int threadId, unsigned int nThreads
  * @param bucketIdx bucket index to add to maps at
  */
 unsigned int mergeBuckets(HashMap* dest, HashMap* src, unsigned int bucketIdx);
-
-
-/**
- * Increments the value for specified key by 1. If no
- * key-value pair exists, one will be created with value 1.
- * @param map pointer to map to put pair
- * @param k Key of value to increment. 
- * @param v Value to increment by.
- * @return 1 if value added, 0 if merged with an existing.
- */
-unsigned int addToBucket(HashMap* map, Key k, Value v, unsigned int hash);
-
 
 #endif /* OPEN_MP_UTIL__H */

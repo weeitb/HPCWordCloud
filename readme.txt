@@ -103,3 +103,27 @@ in the report.
      [ii] Submit a job to the discovery cluster queue through the command
 	'bsub $<$ run-mpi.bash'
      [iii] Output logs will be written in the current directory to output_file
+
+
+OPENMP + MPI:
+The following section describes the repository structure for OpenMP+MPI relevant files. Refer to the serial section to see details on the OpenMP,
+and MPI code, which is used as a base for the hybrid implementation.
+
+HPCWordCloud/ Top level folder containing repository
+            openmp-mpi/ source code related to openmp-mpi implementation.
+	              src/Main.c Openmp + mpi entry point. 
+		      run-openmp-mpi.bash Bash file for submitting sequential job to lsf on Discovery Cluster.
+		      run-results/ Output files of runs performed for parallel timing measurements.
+		      Makefile script for building openmp+mpi parallel configuration of word counting.
+Running source code:
+The following steps describe how to run the openmp-mpi results to reproduce results shown above.
+
+[1.] Download the Project Update Paralllel 3 Code release for the stable branch of the codeline for this project submission. See references for url.
+[2.] Enter the directory HPCWordCloud/openmp-mpi
+[3.] Call 'make'
+[4.] The code can then be called through issuing a job through the batch script by following the steps below:
+     [i] Edit lines 7 and 8 of run-mpi.bash to set the working directory to the current directory the
+         script is located in.
+     [ii] Submit a job to the discovery cluster queue through the command\\
+          'bsub $<$ run-openmp-mpi.bash'
+     [iii] Output logs will be written in the current directory to output\_file

@@ -11,6 +11,7 @@
 #include "MapUtil.h"
 #include "FileParser.h"
 #include "mpiUtil.h"
+#include "stack.h"
 
 // our input arguments are being redirected to
 // mpi. Define directory to read.
@@ -79,8 +80,8 @@ int main(int argc, char** argv) {
     //printf("There are %d unique words.\n", maps[0]->nElements);
     deleteMap(map);
     stop = MPI_Wtime();
-    printf("%.5e,", stop_read - start);
-    printf("%.5e,", stop_reduce - stop_read);
+    printf("%.5e\n", stop_read - start);
+    printf("%.5e\n", stop_reduce - stop_read);
     printf("%.5e\n", stop - start);
   } else {
     deleteMap(map);

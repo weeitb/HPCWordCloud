@@ -1,0 +1,292 @@
+Sender: LSF System <lsfadmin@compute-0-052>
+Subject: Job 642717: <word_cloud_hybrid> in cluster <mghpcc_cluster1> Done
+
+Job <word_cloud_hybrid> was submitted from host <discovery2> by user <bertorelli.w> in cluster <mghpcc_cluster1>.
+Job was executed on host(s) <2*compute-0-052>, in queue <ser-par-10g>, as user <bertorelli.w> in cluster <mghpcc_cluster1>.
+                            <2*compute-0-053>
+</home/bertorelli.w> was used as the home directory.
+</home/bertorelli.w/project/HPCWordCloud/openmp-mpi> was used as the working directory.
+Started at Thu Apr 14 19:18:28 2016
+Results reported at Thu Apr 14 19:20:42 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -J word_cloud_hybrid
+#BSUB -o output_file
+#BSUB -e error_file
+#BSUB -n 4
+#BSUB -R "span[ptile=2]"
+#BSUB -q ser-par-10g
+#BSUB cwd /home/bertorelli.w/project/HPCWordCloud/openmp-mpi
+work=/home/bertorelli.w/project/HPCWordCloud/openmp-mpi
+cd $work
+tempfile1=hostlistrun
+tempfile2=hostlist-tcp
+echo $LSB_MCPU_HOSTS > $tempfile1
+declare -a hosts
+read -a hosts < ${tempfile1}
+for ((i=0; i<${#hosts[@]}; i+=2)) ;
+  do
+    HOST=${hosts[$i]}
+    CORE=${hosts[(($i+1))]}
+    echo $HOST:$CORE >> $tempfile2
+done
+
+export OMP_NUM_THREADS=8
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+sleep 1
+mpirun -np 4 -prot -TCP -lsf ./openmp-mpi
+
+(... more ...)
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :               734.27 sec.
+    Max Memory :             28 MB
+    Average Memory :         12.50 MB
+    Total Requested Memory : -
+    Delta Memory :           -
+    (Delta: the difference between total requested memory and actual max usage.)
+    Max Swap :               1455 MB
+
+    Max Processes :          10
+    Max Threads :            25
+
+The output (if any) follows:
+
+7.08490e-01
+7.90811e-03
+9.62899e-02
+8.39778e-01
+4.13332e-01
+9.43303e-03
+1.16315e-01
+5.68418e-01
+4.20020e-01
+7.45606e-03
+1.16969e-01
+5.73653e-01
+4.24666e-01
+9.33814e-03
+1.17835e-01
+5.81802e-01
+4.16335e-01
+7.83300e-03
+1.20092e-01
+5.73679e-01
+4.19924e-01
+8.77786e-03
+1.07739e-01
+5.65953e-01
+4.19451e-01
+9.02200e-03
+1.11781e-01
+5.71518e-01
+4.18644e-01
+7.91383e-03
+1.07443e-01
+5.63265e-01
+4.15623e-01
+8.12006e-03
+1.07951e-01
+5.61000e-01
+4.17607e-01
+8.52609e-03
+1.09164e-01
+5.64583e-01
+4.26470e-01
+8.50701e-03
+1.05406e-01
+5.69574e-01
+4.13493e-01
+8.05712e-03
+1.21725e-01
+5.72693e-01
+4.16177e-01
+8.78191e-03
+1.21614e-01
+5.77520e-01
+4.28710e-01
+9.18603e-03
+1.10302e-01
+5.77454e-01
+4.22700e-01
+8.86512e-03
+1.02124e-01
+5.63014e-01
+4.13942e-01
+8.31604e-03
+1.17078e-01
+5.68771e-01
+4.04901e-01
+8.79502e-03
+1.28326e-01
+5.71496e-01
+4.13941e-01
+9.57894e-03
+1.16159e-01
+5.69133e-01
+4.14774e-01
+8.01992e-03
+1.14691e-01
+5.66988e-01
+4.19704e-01
+8.15606e-03
+1.14501e-01
+5.71670e-01
+4.15895e-01
+7.96199e-03
+1.12494e-01
+5.65734e-01
+4.19113e-01
+9.44185e-03
+1.19041e-01
+5.76910e-01
+4.07390e-01
+8.57902e-03
+1.24441e-01
+5.70561e-01
+4.14514e-01
+8.57115e-03
+1.09272e-01
+5.61625e-01
+4.16138e-01
+8.32009e-03
+1.23738e-01
+5.77208e-01
+4.28256e-01
+8.21805e-03
+1.01627e-01
+5.67845e-01
+4.13745e-01
+7.56097e-03
+1.17951e-01
+5.68847e-01
+4.14057e-01
+9.63306e-03
+1.08875e-01
+5.61777e-01
+4.15682e-01
+9.02700e-03
+1.17207e-01
+5.72972e-01
+4.16204e-01
+8.36420e-03
+1.07061e-01
+5.60976e-01
+4.16250e-01
+8.28695e-03
+1.11806e-01
+5.65731e-01
+4.15907e-01
+9.58300e-03
+1.05403e-01
+5.60556e-01
+4.08407e-01
+9.23491e-03
+1.21861e-01
+5.68775e-01
+7.10681e-01
+7.43890e-03
+1.02321e-01
+8.47603e-01
+4.18261e-01
+7.88593e-03
+1.03614e-01
+5.59515e-01
+4.09788e-01
+9.77707e-03
+1.08044e-01
+5.57463e-01
+4.17183e-01
+9.09400e-03
+1.09889e-01
+5.65626e-01
+4.11873e-01
+7.64585e-03
+1.22752e-01
+5.71751e-01
+4.17031e-01
+8.14390e-03
+1.13189e-01
+5.67567e-01
+4.18120e-01
+9.46999e-03
+1.09149e-01
+5.66152e-01
+4.20066e-01
+7.95007e-03
+1.13952e-01
+5.71494e-01
+4.20849e-01
+8.32605e-03
+1.09274e-01
+5.67766e-01
+4.18235e-01
+7.46489e-03
+1.20751e-01
+5.75788e-01
+4.23914e-01
+9.76801e-03
+1.04976e-01
+5.60303e-01
+4.12061e-01
+9.12499e-03
+1.13753e-01
+5.64276e-01
+4.00074e-01
+8.09598e-03
+1.29098e-01
+5.66667e-01
+4.14530e-01
+8.61096e-03
+1.06686e-01
+5.59308e-01
+4.19307e-01
+8.28981e-03
+1.07568e-01
+5.64422e-01
+4.15283e-01
+8.52489e-03
+1.11284e-01
+5.64284e-01
+4.11465e-01
+7.62296e-03
+1.03306e-01
+5.52274e-01
+
+
+PS:
+
+Read file <error_file> for stderr output of this job.
+

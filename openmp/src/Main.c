@@ -11,6 +11,7 @@
 #include "MapUtil.h"
 #include "FileParser.h"
 #include "OpenMPUtil.h"
+#include "stack.h"
 
 int main(int argc, char** argv) {
   double start, stop;
@@ -54,7 +55,7 @@ int main(int argc, char** argv) {
     // Wait for thread 1 to finish allocating space for all maps.
     #pragma omp barrier
     // Each thread creates it's own map.
-    if (strcmp(argv[2], "bad")) {
+    if (strcmp(argv[2], "bad") == 0) {
       maps[tid] = newMap(atoi(argv[3]), &badStringHasher, &stringComparator, &stringCopy);
     } else {
       maps[tid] = newMap(atoi(argv[3]), &stringHasher, &stringComparator, &stringCopy);
@@ -62,20 +63,20 @@ int main(int argc, char** argv) {
     // only one thread can access the stack at a time to prevent multiple stacks
     // from accidentally reading the same file.
     char* filename;
-    filename = pop(stack);
+    filename = OpenMPPop(stack);
     while(filename != NULL) {
       // most of the time spent should be here, so collisions should in theory
       // not cause a large performance impact.
       readFile(filename, 0, maps[tid]);
       free(filename);
-      filename = pop(stack);
+      filename = OpenMPPop(stack);
     }
     // wait until all threads get here to map reduce
     #pragma omp barrier
     if (tid == 0) {
       stop_read = omp_get_wtime();
     }
-    mapReduce(maps, tid, nThreads);
+    OpenMPMapReduce(maps, tid, nThreads);
     #pragma omp barrier
     if (tid == 0) {
       stop_reduce = omp_get_wtime();
@@ -88,11 +89,11 @@ int main(int argc, char** argv) {
       // TODO: We could possibly parallelize this transformation and sort.
       MapElement* elements = map2Array(maps[0]);
       sortArray(elements, maps[0]->nElements);
-      printf("Top 10 words:\n");
-      int i;
-      for(i = 0; i < 10; i++) {
-	printf("%d\t%s\t%d\n", i, (char*)elements[i].k, elements[i].v);
-      }
+      //printf("Top 10 words:\n");
+      //int i;
+      //for(i = 0; i < 10; i++) {
+      //printf("%d\t%s\t%d\n", i, (char*)elements[i].k, elements[i].v);
+      //}
   
       deleteMapArray(elements, maps[0]->nElements);
       //printf("There are %d unique words.\n", maps[0]->nElements);
@@ -100,8 +101,8 @@ int main(int argc, char** argv) {
       stop = omp_get_wtime();
       free(maps);
       double time_spent = (double)(stop - start);
-      printf("%.5e,", stop_read - start);
-      printf("%.5e,", stop_reduce - stop_read);
+      printf("%.5e\n", stop_read - start);
+      printf("%.5e\n", stop_reduce - stop_read);
       printf("%.5e\n", time_spent);
     }
   }

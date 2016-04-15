@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
     printf("Insufficient arguments provided to function. Please specify:\n <directory of files to parse> ((good) | (bad)) <number of hashmap bins>\n");
     return 0;
   }
-  if (strcmp(argv[2], "bad")) {
+  if (strcmp(argv[2], "bad") == 0) {
     map = newMap(atoi(argv[3]), &badStringHasher, &stringComparator, &stringCopy);
   } else {
     map = newMap(atoi(argv[3]), &stringHasher, &stringComparator, &stringCopy);
